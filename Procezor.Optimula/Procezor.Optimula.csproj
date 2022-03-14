@@ -1,0 +1,37 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <PackageId>HraveMzdy.Procezor.Optimula</PackageId>
+    <Version>0.0.1</Version>
+    <Authors>Ladislav Lisy</Authors>
+    <Product>HraveMzdy.Procezor.Optimula</Product>
+    <Description>Czech payroll procesor</Description>
+    <Copyright>Copyright 2022</Copyright>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <PackageProjectUrl>http://hravemzdy.org/procezor-optimula</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/mzdyhrave/payrolcs.git</RepositoryUrl>
+    <RepositoryType>github</RepositoryType>
+    <PackageTags>payroll, legal, wages, social, health, tax, income, insurance</PackageTags>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>hravemzdy__org_publish_key.pfx</AssemblyOriginatorKeyFile>
+    <AssemblyName>HraveMzdy.Procezor.Optimula</AssemblyName>
+    <RootNamespace>HraveMzdy.Procezor.Optimula</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\..\LICENSE">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+    <None Include="LICENSE">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="HraveMzdy.Procezor" Version="0.0.3" />
+  </ItemGroup>
+
+</Project>

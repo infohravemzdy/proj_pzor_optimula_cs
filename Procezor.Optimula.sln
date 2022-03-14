@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31321.278
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Procezor.Optimula", "Procezor.Optimula\Procezor.Optimula.csproj", "{C5847050-D34D-4AFD-8D31-51A07E12F5CB}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Procezor.OptimulaTest", "Procezor.OptimulaTest\Procezor.OptimulaTest.csproj", "{EA4F885F-D7A2-43BE-9245-775251EADFD1}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C5847050-D34D-4AFD-8D31-51A07E12F5CB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C5847050-D34D-4AFD-8D31-51A07E12F5CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C5847050-D34D-4AFD-8D31-51A07E12F5CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C5847050-D34D-4AFD-8D31-51A07E12F5CB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EA4F885F-D7A2-43BE-9245-775251EADFD1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EA4F885F-D7A2-43BE-9245-775251EADFD1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EA4F885F-D7A2-43BE-9245-775251EADFD1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EA4F885F-D7A2-43BE-9245-775251EADFD1}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {979140D5-C856-46CA-A5A5-AE69FC1D2B04}
+	EndGlobalSection
+EndGlobal
