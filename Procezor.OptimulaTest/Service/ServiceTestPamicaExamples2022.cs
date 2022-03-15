@@ -1,23 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AutoFixture;
-using FluentAssertions;
-using NSubstitute;
 using Xunit;
 using Xunit.Abstractions;
-using HraveMzdy.Legalios.Service;
 using HraveMzdy.Legalios.Service.Types;
 using HraveMzdy.Legalios.Service.Interfaces;
-using HraveMzdy.Procezor.Service;
-using HraveMzdy.Procezor.Optimula.Registry.Constants;
-using HraveMzdy.Procezor.Optimula.Service;
-using HraveMzdy.Procezor.Service.Interfaces;
-using HraveMzdy.Procezor.Optimula.Registry.Providers;
 using Procezor.OptimulaTest.Examples;
-using System.IO;
 
 namespace Procezor.OptimulaTest.Service
 {
