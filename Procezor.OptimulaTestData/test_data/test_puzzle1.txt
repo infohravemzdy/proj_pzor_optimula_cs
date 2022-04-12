@@ -1,0 +1,11 @@
+            OptimulaPuzzleGenerator.Spec(1, "Dohoda_DPP_DPC_ZERO", "101")
+                .WithFPremiumBaseVal(7798 * 100).WithFPremiumPersVal(0 * 100)
+                .WithFullSheetHrsVal(168 * 60).WithTimeSheetHrsVal(168 * 60).WithWorkSheetHrsVal(168 * 60).WithWorkSheetDayVal(21 * 100)     
+                .WithHomeOffMonthVal(3947 * 100).WithClothesDailyVal(66 * 100).WithMealConDailyVal(82 * 100 + 60)
+                .WithAgrWorkLimitVal(860 * 100).WithAgrHourLimitVal(5 * 60).WithAgrWorkTarifVal(170 * 100),
+            OptimulaPuzzleGenerator.Spec(2, "Dohoda_DPP_DPC_VALS", "102")
+                .WithFPremiumBaseVal(14350 * 100).WithFPremiumPersVal(0 * 100)
+                .WithFullSheetHrsVal(168 * 60).WithTimeSheetHrsVal(168 * 60).WithWorkSheetHrsVal(80 * 60).WithWorkSheetDayVal(10 * 100)
+                .WithHomeOffMonthVal(0 * 100).WithClothesDailyVal(50 * 100).WithMealConDailyVal(82 * 100 + 60)
+                .WithAgrWorkLimitVal(10000 * 100).WithAgrHourLimitVal(21 * 60).WithAgrWorkTarifVal(380 * 100)
+                .WithAgtWorkLimitVal(3499 * 100).WithAgtHourLimitVal(20 * 60).WithAgtWorkTarifVal(170 * 100),

@@ -31,6 +31,11 @@ namespace HraveMzdy.Procezor.Optimula.Service
 
         public ServiceOptimulaPuzzle() : base(TEST_VERSION_PUZZLE, TEST_FINAL_DEFS)
         {
+            var buildSuccess = BuildFactories();
+            if (buildSuccess == false)
+            {
+                Console.WriteLine($"Version: {this.Version}, build factories failed");
+            }
         }
 
         public override IEnumerable<IContractTerm> GetContractTerms(IPeriod period, IEnumerable<ITermTarget> targets)

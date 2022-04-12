@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using Xunit;
-using Xunit.Abstractions;
 using HraveMzdy.Legalios.Service.Types;
 using HraveMzdy.Legalios.Service.Interfaces;
-using Procezor.OptimulaTest.Examples;
+using HraveMzdy.Procezor.Generator;
+using Xunit;
+using Xunit.Abstractions;
 
 namespace Procezor.OptimulaTest.Service
 {
+    [Collection("Non-Parallel")]
     public class ServiceTestPamicaExamples2022 : ServiceTestPamicaExampleTemplate
     {
         private static IPeriod TestPeriod = new Period(2022, 1);
@@ -36,42 +37,49 @@ namespace Procezor.OptimulaTest.Service
         [Fact]
         public void ServiceExamples_1_OPTOptTestHourTestCase161Test()
         {
-            OptimulaGenerator example = Example_1_OPTOptTestHourTestCase161();
+            OptimulaGenerator example = Example_1_OPTOptTestHourTestCase161(TestPeriod);
 
             ServiceExampleTest(example, TestPeriod, TestPeriodCode, PrevPeriodCode);
         }
         [Fact]
         public void ServiceExamples_1_OPTOptTestHourTestCase276Test()
         {
-            OptimulaGenerator example = Example_1_OPTOptTestHourTestCase276();
+            OptimulaGenerator example = Example_1_OPTOptTestHourTestCase276(TestPeriod);
 
             ServiceExampleTest(example, TestPeriod, TestPeriodCode, PrevPeriodCode);
         }
         [Fact]
         public void ServiceExamples_1_OPTOptTestEpsTestCase126Test()
         {
-            OptimulaGenerator example = Example_1_OPTOptTestEpsTestCase126();
+            OptimulaGenerator example = Example_1_OPTOptTestEpsTestCase126(TestPeriod);
+
+            ServiceExampleTest(example, TestPeriod, TestPeriodCode, PrevPeriodCode);
+        }
+        [Fact]
+        public void ServiceExamples_1_OPTOptTestEpsTestCase233Test()
+        {
+            OptimulaGenerator example = Example_1_OPTOptTestEpsTestCase233(TestPeriod);
 
             ServiceExampleTest(example, TestPeriod, TestPeriodCode, PrevPeriodCode);
         }
         [Fact]
         public void ServiceExamples_101_FullTime_OverTimeZeroHolidaysZeroTest()
         {
-            OptimulaGenerator example = Example_101_FullTime_OverTimeZeroHolidaysZero();
+            OptimulaGenerator example = Example_101_FullTime_OverTimeZeroHolidaysZero(TestPeriod);
 
             ServiceExampleTest(example, TestPeriod, TestPeriodCode, PrevPeriodCode);
         }
         [Fact]
         public void ServiceExamples_111_WorkTime_OverTimeZeroHolidaysZeroTest()
         {
-            OptimulaGenerator example = Example_111_WorkTime_OverTimeZeroHolidaysZero();
+            OptimulaGenerator example = Example_111_WorkTime_OverTimeZeroHolidaysZero(TestPeriod);
 
             ServiceExampleTest(example, TestPeriod, TestPeriodCode, PrevPeriodCode);
         }
         [Fact]
         public void ServiceExamples_102_FullTime_MinimumWageTest()
         {
-            OptimulaGenerator example = Example_102_FullTime_MinimumWage();
+            OptimulaGenerator example = Example_102_FullTime_MinimumWage(TestPeriod);
 
             ServiceExampleTest(example, TestPeriod, TestPeriodCode, PrevPeriodCode);
         }

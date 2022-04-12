@@ -1,16 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using HraveMzdy.Legalios.Service.Interfaces;
 using HraveMzdy.Legalios.Service.Types;
-using HraveMzdy.Procezor.Optimula.Registry.Constants;
-using HraveMzdy.Procezor.Optimula.Registry.Providers;
 using HraveMzdy.Procezor.Service.Interfaces;
-using HraveMzdy.Procezor.Service.Types;
 
-namespace Procezor.OptimulaTest.Examples
+namespace HraveMzdy.Procezor.Generator
 {
     public abstract class OptimulaGenerator
     {
@@ -19,15 +14,16 @@ namespace Procezor.OptimulaTest.Examples
             Id = id;
             Name = name;
             Number = number;
+            ResultDescription = "";
 
             DefaultAgrWorkTarifValue = 0;
             DefaultAgrWorkRatioValue = 0;
-            DefaultAgrHourLimitValue = 0;
+            DefaultAgrWorkMaximValue = 0;
             DefaultAgrWorkLimitValue = 0;
-            DefaultAgtWorkTarifValue = 0;
-            DefaultAgtWorkRatioValue = 0;
-            DefaultAgtHourLimitValue = 0;
-            DefaultAgtWorkLimitValue = 0;
+            DefaultAgrTaskTarifValue = 0;
+            DefaultAgrTaskRatioValue = 0;
+            DefaultAgrTaskMaximValue = 0;
+            DefaultAgrTaskLimitValue = 0;
             DefaultClothesHoursValue = 0;
             DefaultClothesDailyValue = 0;
             DefaultMealConDailyValue = 0;
@@ -63,14 +59,16 @@ namespace Procezor.OptimulaTest.Examples
             DefaultQAgrWorkBaseValue = 0;
             DefaultQSumWorkHourValue = 0;
 
-            AgrWorkTarifFunc = DefaultAgrWorkTarif;
             AgrWorkRatioFunc = DefaultAgrWorkRatio;
-            AgrHourLimitFunc = DefaultAgrHourLimit;
+            AgrWorkMaximFunc = DefaultAgrWorkMaxim;
+            AgrWorkTarifFunc = DefaultAgrWorkTarif;
             AgrWorkLimitFunc = DefaultAgrWorkLimit;
-            AgtWorkTarifFunc = DefaultAgtWorkTarif;
-            AgtWorkRatioFunc = DefaultAgtWorkRatio;
-            AgtHourLimitFunc = DefaultAgtHourLimit;
-            AgtWorkLimitFunc = DefaultAgtWorkLimit;
+            AgrWorkHoursFunc = DefaultAgrWorkHours;
+            AgrTaskRatioFunc = DefaultAgrTaskRatio;
+            AgrTaskMaximFunc = DefaultAgrTaskMaxim;
+            AgrTaskTarifFunc = DefaultAgrTaskTarif;
+            AgrTaskLimitFunc = DefaultAgrTaskLimit;
+            AgrTaskHoursFunc = DefaultAgrTaskHours;
             ClothesHoursFunc = DefaultClothesHours;
             ClothesDailyFunc = DefaultClothesDaily;
             MealConDailyFunc = DefaultMealConDaily;
@@ -105,40 +103,290 @@ namespace Procezor.OptimulaTest.Examples
             QHOfficeBaseFunc = DefaultQHOfficeBase;
             QAgrWorkBaseFunc = DefaultQAgrWorkBase;
             QSumWorkHourFunc = DefaultQSumWorkHour;
-            /*
-            "$C",  "CompAgrWorkTariff",   OPTIONAL,  3), // SAZBA DPP
-            "$D",  "CompAgrWorkRatio",    OPTIONAL,  4), // Procento DPP
-            "$E",  "CompClothDsTariff",   OPTIONAL,  5), // Sazba ošatné
-            "$F",  "CompHOfficeTariff",   OPTIONAL,  6), // Sazba HO
-            "$G",  "CompHOfficeHours",    OPTIONAL,  7), // Počet hodin HO
-            "$I",  "BonusSalaryAmount",   OPTIONAL,  9), // Osobní ohodnocení
-            "$H",  "BonusHourlyAmount",   OPTIONAL,  8), // Osobní ohodnocení
-            "$J",  "PremiumBaseAmount",   OPTIONAL, 10), // Prémie
-            "$K",  "PremiumBossAmount",   OPTIONAL, 11), // Prémie
-            "$L",  "PremiumOsobAmount",   OPTIONAL, 12), // Prémie - Osobní ohodnocení
-            "$M",  "FullsheetHours",      OPTIONAL, 13), // Zákonný úvazek
-            "$N",  "TimesheetHours",      OPTIONAL, 14), // Úvazek
-            "$O",  "HolisheetHours",      OPTIONAL, 15), // Hodiny svátků v ES
-            "$P",  "WorksheetHours",      OPTIONAL, 16), // Odprac. bez přesčasů
-            "$Q",  "WorksheetDays",       OPTIONAL, 17), // Počet odprac směn
-            "$R",  "OversheetHours",      OPTIONAL, 18), // Přesčas  (hod)
-            "$S",  "RecomVacaHours",      OPTIONAL, 19), // Dovolená (hod)
-            "$T",  "RecomHoliHours",      OPTIONAL, 20), // Svátky (hod)
-            "$AA", "AllowOverHours",      OPTIONAL, 21), // Příplatky (hod, proc)
-            "$AB", "AllowOverRatio",      OPTIONAL, 22), // Příplatky (hod, proc)
-            "$AC", "AllowRestHours",      OPTIONAL, 23), // Příplatky (hod, proc)
-            "$AD", "AllowRestRatio",      OPTIONAL, 24), // Příplatky (hod, proc)
-            "$AE", "AllowWendHours",      OPTIONAL, 25), // Příplatky (hod, proc)
-            "$AF", "AllowWendRatio",      OPTIONAL, 26), // Příplatky (hod, proc)
-            "$AG", "AllowNighHours",      OPTIONAL, 27), // Příplatky (hod, proc)
-            "$AH", "AllowNighRatio",      OPTIONAL, 28), // Příplatky (hod, proc)
-            "$AI", "AllowHoliHours",      OPTIONAL, 29), // Příplatky (hod, proc)
-            "$AJ", "AllowHoliRatio",      OPTIONAL, 30), // Příplatky (hod, proc)
-            */
+
+            TestImpWorkSheetHrs = 0;
+            TestImpWorkSheetDay = 0;
+            TestImpWotkAbsenHrs = 0;
+            TestImpWotkAbsenDay = 0;
+            TestImpOverSheetHrs = 0;
+            TestResAgrWorkPaymt = 0;
+            TestResAgrWorkHours = 0;
+            TestResAgrTaskPaymt = 0;
+            TestResAgrTaskHours = 0;
+            TestResClothesPaymt = 0;
+            TestResMealConPaymt = 0;
+            TestResHomeOffPaymt = 0;
+            TestImpMSalaryAward = 0;
+            TestResMSalaryAward = 0;
+            TestImpHSalaryAward = 0;
+            TestResHSalaryAward = 0;
+            TestImpFPremiumBase = 0;
+            TestResFPremiumBase = 0;
+            TestImpFPremiumBoss = 0;
+            TestResFPremiumBoss = 0;
+            TestImpFPremiumPers = 0;
+            TestResFPremiumPers = 0;
+            TestImpQAverageBase = 0;
+            TestImpAverPremsPay = 0;
+            TestImpAverVacasPay = 0;
+            TestImpAverOversPay = 0;
+            TestResIncomesNetto = 0;
+            TestResPaymentNetto = 0;
+            TestResDiffValNetto = 0;
+        }
+        public OptimulaGenerator ParseResult(string resultString)
+        {
+            string[] resultDefValues = resultString.Split(';');
+
+            Func<string, decimal>[] specParser = new Func<string, decimal>[]
+            {
+                ParseNADecimal, //Evideční číslo  	101
+                ParseNADecimal, //Jméno a příjmení 	Drahota Jakub
+                ParseDecimal,   //Mzdové období 	202201
+                ParseDecimal,   //IMP-WorkSheetHrs
+                ParseDecimal,   //IMP-WorkSheetDay
+                ParseDecimal,   //IMP-WotkAbsenHrs
+                ParseDecimal,   //IMP-WotkAbsenDay
+                ParseDecimal,   //IMP-OverSheetHrs
+                ParseDecimal,   //RES-AgrWorkPaymt
+                ParseDecimal,   //RES-AgrWorkHours
+                ParseDecimal,   //RES-AgtWorkPaymt
+                ParseDecimal,   //RES-AgtWorkHours
+                ParseDecimal,   //RES-ClothesPaymt
+                ParseDecimal,   //RES-MealConPaymt
+                ParseDecimal,   //RES-HomeOffPaymt
+                ParseDecimal,   //IMP-MSalaryAward
+                ParseDecimal,   //RES-MSalaryAward
+                ParseDecimal,   //IMP-HSalaryAward
+                ParseDecimal,   //RES-HSalaryAward
+                ParseDecimal,   //IMP-FPremiumBase
+                ParseDecimal,   //RES-FPremiumBase
+                ParseDecimal,   //IMP-FPremiumBoss
+                ParseDecimal,   //RES-FPremiumBoss
+                ParseDecimal,   //IMP-FPremiumPers
+                ParseDecimal,   //RES-FPremiumPers
+                ParseDecimal,   //IMP-QAverageBase
+                ParseDecimal,   //IMP-AverPremsPay
+                ParseDecimal,   //IMP-AverVacasPay
+                ParseDecimal,   //IMP-AverOversPay
+                ParseDecimal,   //RES-IncomesNetto
+                ParseDecimal,   //RES-PaymentNetto
+                ParseDecimal,   //RES-DiffValNetto
+            };
+            decimal[] resultIntValues = resultDefValues.Zip(specParser).Select((x) => x.Second(x.First)).ToArray();
+
+            Func<decimal, OptimulaGenerator>[] resultGenerator = new Func<decimal, OptimulaGenerator>[]
+            {
+                WithNADecimalVal,          //Evideční číslo  	101
+                WithNADecimalVal,          //Jméno a příjmení 	Drahota Jakub
+                WithTestResultPeriodNum,   //Mzdové období 	    202201
+                WithTestImpWorkSheetHrs,   //IMP-WorkSheetHrs
+                WithTestImpWorkSheetDay,   //IMP-WorkSheetDay
+                WithTestImpWotkAbsenHrs,   //IMP-WotkAbsenHrs
+                WithTestImpWotkAbsenDay,   //IMP-WotkAbsenDay
+                WithTestImpOverSheetHrs,   //IMP-OverSheetHrs
+                WithTestResAgrWorkPaymt,   //RES-AgrWorkPaymt
+                WithTestResAgrWorkHours,   //RES-AgrWorkHours
+                WithTestResAgrTaskPaymt,   //RES-AgtWorkPaymt
+                WithTestResAgrTaskHours,   //RES-AgtWorkHours
+                WithTestResClothesPaymt,   //RES-ClothesPaymt
+                WithTestResMealConPaymt,   //RES-MealConPaymt
+                WithTestResHomeOffPaymt,   //RES-HomeOffPaymt
+                WithTestImpMSalaryAward,   //IMP-MSalaryAward
+                WithTestResMSalaryAward,   //RES-MSalaryAward
+                WithTestImpHSalaryAward,   //IMP-HSalaryAward
+                WithTestResHSalaryAward,   //RES-HSalaryAward
+                WithTestImpFPremiumBase,   //IMP-FPremiumBase
+                WithTestResFPremiumBase,   //RES-FPremiumBase
+                WithTestImpFPremiumBoss,   //IMP-FPremiumBoss
+                WithTestResFPremiumBoss,   //RES-FPremiumBoss
+                WithTestImpFPremiumPers,   //IMP-FPremiumPers
+                WithTestResFPremiumPers,   //RES-FPremiumPers
+                WithTestImpQAverageBase,   //IMP-QAverageBase
+                WithTestImpAverPremsPay,   //IMP-AverPremsPay
+                WithTestImpAverVacasPay,   //IMP-AverVacasPay
+                WithTestImpAverOversPay,   //IMP-AverOversPay
+                WithTestResIncomesNetto,   //RES-IncomesNetto
+                WithTestResPaymentNetto,   //RES-PaymentNetto
+                WithTestResDiffValNetto,   //RES-DiffValNetto
+            };
+            resultIntValues.Zip(resultGenerator).Select((x) => x.Second(x.First)).ToArray();
+
+            CreateResultDescription(TestResultPeriod);
+
+            return this;
+        }
+        public OptimulaGenerator CreateResultDescription(IPeriod period)
+        {
+            string[] resultLine = new string[]
+            {
+                Number,
+                Name,
+                period.Code.ToString(),
+                DecFormatDecimal(TestImpWorkSheetHrs), //IMP-WorkSheetHrs
+                DecFormatDecimal(TestImpWorkSheetDay), //IMP-WorkSheetDay
+                DecFormatDecimal(TestImpWotkAbsenHrs), //IMP-WotkAbsenHrs
+                DecFormatDecimal(TestImpWotkAbsenDay), //IMP-WotkAbsenDay
+                DecFormatDecimal(TestImpOverSheetHrs), //IMP-OverSheetHrs
+                DecFormatDecimal(TestResAgrWorkPaymt), //RES-AgrWorkPaymt
+                DecFormatDecimal(TestResAgrWorkHours), //RES-AgrWorkHours
+                DecFormatDecimal(TestResAgrTaskPaymt), //RES-AgtWorkPaymt
+                DecFormatDecimal(TestResAgrTaskHours), //RES-AgtWorkHours
+                DecFormatDecimal(TestResClothesPaymt), //RES-ClothesPaymt
+                DecFormatDecimal(TestResMealConPaymt), //RES-MealConPaymt
+                DecFormatDecimal(TestResHomeOffPaymt), //RES-HomeOffPaymt
+                DecFormatDecimal(TestImpMSalaryAward), //IMP-MSalaryAward
+                DecFormatDecimal(TestResMSalaryAward), //RES-MSalaryAward
+                DecFormatDecimal(TestImpHSalaryAward), //IMP-HSalaryAward
+                DecFormatDecimal(TestResHSalaryAward), //RES-HSalaryAward
+                DecFormatDecimal(TestImpFPremiumBase), //IMP-FPremiumBase
+                DecFormatDecimal(TestResFPremiumBase), //RES-FPremiumBase
+                DecFormatDecimal(TestImpFPremiumBoss), //IMP-FPremiumBoss
+                DecFormatDecimal(TestResFPremiumBoss), //RES-FPremiumBoss
+                DecFormatDecimal(TestImpFPremiumPers), //IMP-FPremiumPers
+                DecFormatDecimal(TestResFPremiumPers), //RES-FPremiumPers
+                DecFormatDecimal(TestImpQAverageBase), //IMP-QAverageBase
+                DecFormatDecimal(TestImpAverPremsPay), //IMP-AverPremsPay
+                DecFormatDecimal(TestImpAverVacasPay), //IMP-AverVacasPay
+                DecFormatDecimal(TestImpAverOversPay), //IMP-AverOversPay
+                DecFormatDecimal(TestResIncomesNetto), //RES-IncomesNetto
+                DecFormatDecimal(TestResPaymentNetto), //RES-PaymentNetto
+                DecFormatDecimal(TestResDiffValNetto), //RES-DiffValNetto
+            };
+            ResultDescription = string.Join(";", resultLine) + ";";
+
+            return this;
+        }
+        public string[] BuildImportString(IPeriod period, IBundleProps ruleset, IBundleProps prevset)
+        {
+            Int32 AgrWorkRatioVal = AgrWorkRatioFunc(this, period, ruleset, prevset);
+            Int32 AgrWorkMaximVal = AgrWorkMaximFunc(this, period, ruleset, prevset);
+            Int32 AgrWorkTarifVal = AgrWorkTarifFunc(this, period, ruleset, prevset);
+            Int32 AgrWorkLimitVal = AgrWorkLimitFunc(this, period, ruleset, prevset);
+            Int32 AgrWorkHoursVal = AgrWorkHoursFunc(this, period, ruleset, prevset);
+            Int32 AgrTaskRatioVal = AgrTaskRatioFunc(this, period, ruleset, prevset);
+            Int32 AgrTaskMaximVal = AgrTaskMaximFunc(this, period, ruleset, prevset);
+            Int32 AgrTaskTarifVal = AgrTaskTarifFunc(this, period, ruleset, prevset);
+            Int32 AgrTaskLimitVal = AgrTaskLimitFunc(this, period, ruleset, prevset);
+            Int32 AgrTaskHoursVal = AgrTaskHoursFunc(this, period, ruleset, prevset);
+            Int32 ClothesHoursVal = ClothesHoursFunc(this, period, ruleset, prevset);
+            Int32 ClothesDailyVal = ClothesDailyFunc(this, period, ruleset, prevset);
+            Int32 MealConDailyVal = MealConDailyFunc(this, period, ruleset, prevset);
+            Int32 HomeOffMonthVal = HomeOffMonthFunc(this, period, ruleset, prevset);
+            Int32 HomeOffTarifVal = HomeOffTarifFunc(this, period, ruleset, prevset);
+            Int32 HomeOffHoursVal = HomeOffHoursFunc(this, period, ruleset, prevset);
+
+            Int32 MSalaryAwardVal = MSalaryAwardFunc(this, period, ruleset, prevset);
+            Int32 HSalaryAwardVal = HSalaryAwardFunc(this, period, ruleset, prevset);
+            Int32 FPremiumBaseVal = FPremiumBaseFunc(this, period, ruleset, prevset);
+            Int32 FPremiumBossVal = FPremiumBossFunc(this, period, ruleset, prevset);
+            Int32 FPremiumPersVal = FPremiumPersFunc(this, period, ruleset, prevset);
+            Int32 FullSheetHrsVal = FullSheetHrsFunc(this, period, ruleset, prevset);
+            Int32 TimeSheetHrsVal = TimeSheetHrsFunc(this, period, ruleset, prevset);
+            Int32 HoliSheetHrsVal = HoliSheetHrsFunc(this, period, ruleset, prevset);
+            Int32 WorkSheetHrsVal = WorkSheetHrsFunc(this, period, ruleset, prevset);
+            Int32 WorkSheetDayVal = WorkSheetDayFunc(this, period, ruleset, prevset);
+            Int32 OverSheetHrsVal = OverSheetHrsFunc(this, period, ruleset, prevset);
+            Int32 VacaRecomHrsVal = VacaRecomHrsFunc(this, period, ruleset, prevset);
+            Int32 PaidRecomHrsVal = PaidRecomHrsFunc(this, period, ruleset, prevset);
+            Int32 HoliRecomHrsVal = HoliRecomHrsFunc(this, period, ruleset, prevset);
+            Int32 OverAllowHrsVal = OverAllowHrsFunc(this, period, ruleset, prevset);
+            Int32 OverAllowRioVal = OverAllowRioFunc(this, period, ruleset, prevset);
+            Int32 RestAllowHrsVal = RestAllowHrsFunc(this, period, ruleset, prevset);
+            Int32 RestAllowRioVal = RestAllowRioFunc(this, period, ruleset, prevset);
+            Int32 WendAllowHrsVal = WendAllowHrsFunc(this, period, ruleset, prevset);
+            Int32 WendAllowRioVal = WendAllowRioFunc(this, period, ruleset, prevset);
+            Int32 NighAllowHrsVal = NighAllowHrsFunc(this, period, ruleset, prevset);
+            Int32 NighAllowRioVal = NighAllowRioFunc(this, period, ruleset, prevset);
+            Int32 HoliAllowHrsVal = HoliAllowHrsFunc(this, period, ruleset, prevset);
+            Int32 HoliAllowRioVal = HoliAllowRioFunc(this, period, ruleset, prevset);
+            Int32 QClothesBaseVal = QClothesBaseFunc(this, period, ruleset, prevset);
+            Int32 QHOfficeBaseVal = QHOfficeBaseFunc(this, period, ruleset, prevset);
+            Int32 QAgrWorkBaseVal = QAgrWorkBaseFunc(this, period, ruleset, prevset);
+            Int32 QSumWorkHourVal = QSumWorkHourFunc(this, period, ruleset, prevset);
+
+            string[] valuesList = new string[]
+            {
+                Number, // A
+                Name,   // B
+                period.Code.ToString(), // C
+                $"{NumFormatIntX100(AgrWorkRatioVal)}", // D
+                $"{HrsFormatIntX060(AgrWorkMaximVal)}", // E
+                $"{CcyFormatIntX100(AgrWorkTarifVal)}", // F //Sazba DPP/hod
+                $"{CcyFormatIntX100(AgrWorkLimitVal)}", // G //DPP/měs.-základní 
+                $"{HrsFormatIntX060(AgrWorkHoursVal)}", // H //DPP hodiny/měs.-základní
+                $"{NumFormatIntX100(AgrTaskRatioVal)}", // I
+                $"{HrsFormatIntX060(AgrTaskMaximVal)}", // J
+                $"{CcyFormatIntX100(AgrTaskTarifVal)}", // K //Sazba DPČ/hod
+                $"{CcyFormatIntX100(AgrTaskLimitVal)}", // L //DPČ/měs.-základní
+                $"{HrsFormatIntX060(AgrTaskHoursVal)}", // M //DPČ hodiny/měs.-základní
+                $"{CcyFormatIntX100(ClothesHoursVal)}", // N "CompClothHsTariff",   OPTIONAL, 12), // Sazba ošatné                              
+                $"{CcyFormatIntX100(ClothesDailyVal)}", // O //Ošatné/den
+                $"{CcyFormatIntX100(MealConDailyVal)}", // P //Strav.paušál/den
+                $"{CcyFormatIntX100(HomeOffMonthVal)}", // Q //Home office/měs.
+                $"{CcyFormatIntX100(HomeOffTarifVal)}", // R //Home office/měs.
+                $"{HrsFormatIntX060(HomeOffHoursVal)}", // S "CompHOfficeHours",    OPTIONAL, 16), // Počet hodin HO                        
+                $"{CcyFormatIntX100(MSalaryAwardVal)}", // T "BonusSalaryAmount",   OPTIONAL, 17), // Osobní ohodnocení                     
+                $"{CcyFormatIntX100(HSalaryAwardVal)}", // U "BonusHourlyAmount",   OPTIONAL, 18), // Osobní ohodnocení                     
+                $"{CcyFormatIntX100(FPremiumBaseVal)}", // V //Celková částka v čistém 
+                $"{CcyFormatIntX100(FPremiumBossVal)}", // W "PremiumBossAmount",   OPTIONAL, 20), // Prémie                                
+                $"{CcyFormatIntX100(FPremiumPersVal)}", // X //ODMĚNY  
+                "", // ---------------
+                "", // ---------------
+                $"{HrsFormatIntX060(FullSheetHrsVal)}", // "$AA", "FullsheetHours",      OPTIONAL, 22), // Zákonný úvazek                        
+                $"{HrsFormatIntX060(TimeSheetHrsVal)}", // "$AB", //Fond
+                $"{HrsFormatIntX060(HoliSheetHrsVal)}", // "$AC", "HolisheetHours",      OPTIONAL, 24), // Hodiny svátků v ES                    
+                $"{HrsFormatIntX060(WorkSheetHrsVal)}", // "$AD", //Odpracované hodiny  
+                $"{DayFormatIntX100(WorkSheetDayVal)}", // "$AE", //Odpracované dny 
+                $"{HrsFormatIntX060(OverSheetHrsVal)}", // "$AF", "OversheetHours",      OPTIONAL, 27), // Přesčas  (hod)                        
+                $"{HrsFormatIntX060(VacaRecomHrsVal)}", // "$AG", "RecomVacaHours",      OPTIONAL, 28), // Dovolená (hod)                        
+                $"{HrsFormatIntX060(PaidRecomHrsVal)}", // "$AH", "RecomPaidHours",      OPTIONAL, 29), // Dovolená (hod)                        
+                $"{HrsFormatIntX060(HoliRecomHrsVal)}", // "$AI", "RecomHoliHours",      OPTIONAL, 30), // Svátky (hod)                          
+                $"{HrsFormatIntX060(OverAllowHrsVal)}", // "$AJ", "AllowOverHours",      OPTIONAL, 31), // Příplatky (hod, proc)                 
+                $"{CcyFormatIntX100(OverAllowRioVal)}", // "$AK", "AllowOverRatio",      OPTIONAL, 32), // Příplatky (hod, proc)                 
+                $"{HrsFormatIntX060(RestAllowHrsVal)}", // "$AL", "AllowRestHours",      OPTIONAL, 33), // Příplatky (hod, proc)                 
+                $"{CcyFormatIntX100(RestAllowRioVal)}", // "$AM", "AllowRestRatio",      OPTIONAL, 34), // Příplatky (hod, proc)                 
+                $"{HrsFormatIntX060(WendAllowHrsVal)}", // "$AN", "AllowWendHours",      OPTIONAL, 35), // Příplatky (hod, proc)                 
+                $"{CcyFormatIntX100(WendAllowRioVal)}", // "$AO", "AllowWendRatio",      OPTIONAL, 36), // Příplatky (hod, proc)                 
+                $"{HrsFormatIntX060(NighAllowHrsVal)}", // "$AP", "AllowNighHours",      OPTIONAL, 37), // Příplatky (hod, proc)                 
+                $"{CcyFormatIntX100(NighAllowRioVal)}", // "$AQ", "AllowNighRatio",      OPTIONAL, 38), // Příplatky (hod, proc)                 
+                $"{HrsFormatIntX060(HoliAllowHrsVal)}", // "$AR", "AllowHoliHours",      OPTIONAL, 39), // Příplatky (hod, proc)                 
+                $"{CcyFormatIntX100(HoliAllowRioVal)}", // "$AS", "AllowHoliRatio",      OPTIONAL, 40), // Příplatky (hod, proc)                 
+                $"{CcyFormatIntX100(QClothesBaseVal)}", // "$AT", "CompClothesBasis",    OPTIONAL, 41), // Průměr z min.Q                        
+                $"{CcyFormatIntX100(QHOfficeBaseVal)}", // "$AU", "CompHOfficeBasis",    OPTIONAL, 42), // Průměr z min.Q                        
+                $"{CcyFormatIntX100(QAgrWorkBaseVal)}", // "$AV", "CompAgrWorkBasis",    OPTIONAL, 43), // Průměr z min.Q                        
+                $"{CcyFormatIntX100(QSumWorkHourVal)}", // "$AW", "CompAverageHours",    OPTIONAL, 44), // Průměr z min.Q                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
+            };
+
+            if (WorkSheetHrsVal != 0)
+            {
+                return valuesList.ToArray();
+            }
+            return Array.Empty<string>();
         }
 
-        public abstract string[] BuildImportXlsString(IPeriod period, IBundleProps ruleset, IBundleProps prevset);
-        public abstract string[] BuildImportCsvString(IPeriod period, IBundleProps ruleset, IBundleProps prevset);
+        public string[] BuildImportXlsString(IPeriod period, IBundleProps ruleset, IBundleProps prevset)
+        {
+            string[] valuesList = BuildImportString(period, ruleset, prevset);
+            if (valuesList.Length != 0)
+            {
+                string[] importResult = new string[] { string.Join('\t', valuesList) + ";" };
+                return importResult;
+            }
+
+            return Array.Empty<string>();
+        }
+        public string[] BuildImportCsvString(IPeriod period, IBundleProps ruleset, IBundleProps prevset)
+        {
+            string[] valuesList = BuildImportString(period, ruleset, prevset);
+            if (valuesList.Length != 0)
+            {
+                string[] importResult = new string[] { string.Join(';', valuesList) + ";" };
+                return importResult;
+            }
+
+            return Array.Empty<string>();
+        }
         public abstract IEnumerable<ITermTarget> BuildSpecTargets(IPeriod period, IBundleProps ruleset, IBundleProps prevset);
         private Int32 DefaultAgrWorkTarif(OptimulaGenerator gen, IPeriod period, IBundleProps ruleset, IBundleProps prevset)
         {
@@ -148,29 +396,37 @@ namespace Procezor.OptimulaTest.Examples
         {
             return DefaultAgrWorkRatioValue;
         }
-        private Int32 DefaultAgrHourLimit(OptimulaGenerator gen, IPeriod period, IBundleProps ruleset, IBundleProps prevset)
+        private Int32 DefaultAgrWorkMaxim(OptimulaGenerator gen, IPeriod period, IBundleProps ruleset, IBundleProps prevset)
         {
-            return DefaultAgrHourLimitValue;
+            return DefaultAgrWorkMaximValue;
         }
         private Int32 DefaultAgrWorkLimit(OptimulaGenerator gen, IPeriod period, IBundleProps ruleset, IBundleProps prevset)
         {
             return DefaultAgrWorkLimitValue;
         }
-        private Int32 DefaultAgtWorkTarif(OptimulaGenerator gen, IPeriod period, IBundleProps ruleset, IBundleProps prevset)
+        private Int32 DefaultAgrWorkHours(OptimulaGenerator gen, IPeriod period, IBundleProps ruleset, IBundleProps prevset)
         {
-            return DefaultAgtWorkTarifValue;
+            return DefaultAgrWorkHoursValue;
         }
-        private Int32 DefaultAgtWorkRatio(OptimulaGenerator gen, IPeriod period, IBundleProps ruleset, IBundleProps prevset)
+        private Int32 DefaultAgrTaskRatio(OptimulaGenerator gen, IPeriod period, IBundleProps ruleset, IBundleProps prevset)
         {
-            return DefaultAgtWorkRatioValue;
+            return DefaultAgrTaskRatioValue;
         }
-        private Int32 DefaultAgtHourLimit(OptimulaGenerator gen, IPeriod period, IBundleProps ruleset, IBundleProps prevset)
+        private Int32 DefaultAgrTaskMaxim(OptimulaGenerator gen, IPeriod period, IBundleProps ruleset, IBundleProps prevset)
         {
-            return DefaultAgtHourLimitValue;
+            return DefaultAgrTaskMaximValue;
         }
-        private Int32 DefaultAgtWorkLimit(OptimulaGenerator gen, IPeriod period, IBundleProps ruleset, IBundleProps prevset)
+        private Int32 DefaultAgrTaskTarif(OptimulaGenerator gen, IPeriod period, IBundleProps ruleset, IBundleProps prevset)
         {
-            return DefaultAgtWorkLimitValue;
+            return DefaultAgrTaskTarifValue;
+        }
+        private Int32 DefaultAgrTaskLimit(OptimulaGenerator gen, IPeriod period, IBundleProps ruleset, IBundleProps prevset)
+        {
+            return DefaultAgrTaskLimitValue;
+        }
+        private Int32 DefaultAgrTaskHours(OptimulaGenerator gen, IPeriod period, IBundleProps ruleset, IBundleProps prevset)
+        {
+            return DefaultAgrTaskHoursValue;
         }
         private Int32 DefaultClothesHours(OptimulaGenerator gen, IPeriod period, IBundleProps ruleset, IBundleProps prevset)
         {
@@ -312,15 +568,18 @@ namespace Procezor.OptimulaTest.Examples
         public int Id { get; }
         public string Name { get; }
         public string Number { get; }
+        public string ResultDescription { get; protected set; }
 
-        public Int32 DefaultAgrWorkTarifValue { get; private set; }
         public Int32 DefaultAgrWorkRatioValue { get; private set; }
-        public Int32 DefaultAgrHourLimitValue { get; private set; }
+        public Int32 DefaultAgrWorkMaximValue { get; private set; }
+        public Int32 DefaultAgrWorkTarifValue { get; private set; }
         public Int32 DefaultAgrWorkLimitValue { get; private set; }
-        public Int32 DefaultAgtWorkTarifValue { get; private set; }
-        public Int32 DefaultAgtWorkRatioValue { get; private set; }
-        public Int32 DefaultAgtHourLimitValue { get; private set; }
-        public Int32 DefaultAgtWorkLimitValue { get; private set; }
+        public Int32 DefaultAgrWorkHoursValue { get; private set; }
+        public Int32 DefaultAgrTaskRatioValue { get; private set; }
+        public Int32 DefaultAgrTaskMaximValue { get; private set; }
+        public Int32 DefaultAgrTaskTarifValue { get; private set; }
+        public Int32 DefaultAgrTaskLimitValue { get; private set; }
+        public Int32 DefaultAgrTaskHoursValue { get; private set; }
         public Int32 DefaultClothesHoursValue { get; private set; }
         public Int32 DefaultClothesDailyValue { get; private set; }
         public Int32 DefaultMealConDailyValue { get; private set; }
@@ -356,14 +615,47 @@ namespace Procezor.OptimulaTest.Examples
         public Int32 DefaultQAgrWorkBaseValue { get; private set; }
         public Int32 DefaultQSumWorkHourValue { get; private set; }
 
+        public IPeriod TestResultPeriod { get; private set; }
+        public decimal TestImpWorkSheetHrs { get; private set; }
+        public decimal TestImpWorkSheetDay { get; private set; }      
+        public decimal TestImpWotkAbsenHrs { get; private set; }       
+        public decimal TestImpWotkAbsenDay { get; private set; }   
+        public decimal TestImpOverSheetHrs { get; private set; }   
+        public decimal TestResAgrWorkPaymt { get; private set; }
+        public decimal TestResAgrWorkHours { get; private set; }
+        public decimal TestResAgrTaskPaymt { get; private set; }
+        public decimal TestResAgrTaskHours { get; private set; }
+        public decimal TestResClothesPaymt { get; private set; }
+        public decimal TestResMealConPaymt { get; private set; }
+        public decimal TestResHomeOffPaymt { get; private set; }
+        public decimal TestImpMSalaryAward { get; private set; }
+        public decimal TestResMSalaryAward { get; private set; }
+        public decimal TestImpHSalaryAward { get; private set; }
+        public decimal TestResHSalaryAward { get; private set; }
+        public decimal TestImpFPremiumBase { get; private set; }
+        public decimal TestResFPremiumBase { get; private set; }
+        public decimal TestImpFPremiumBoss { get; private set; }
+        public decimal TestResFPremiumBoss { get; private set; }
+        public decimal TestImpFPremiumPers { get; private set; }
+        public decimal TestResFPremiumPers { get; private set; }
+        public decimal TestImpQAverageBase { get; private set; }
+        public decimal TestImpAverPremsPay { get; private set; }
+        public decimal TestImpAverVacasPay { get; private set; }
+        public decimal TestImpAverOversPay { get; private set; }
+        public decimal TestResIncomesNetto { get; private set; }
+        public decimal TestResPaymentNetto { get; private set; }
+        public decimal TestResDiffValNetto { get; private set; }
+
         public Func<OptimulaGenerator, IPeriod, IBundleProps, IBundleProps, Int32> AgrWorkTarifFunc { get; private set; }
         public Func<OptimulaGenerator, IPeriod, IBundleProps, IBundleProps, Int32> AgrWorkRatioFunc { get; private set; }
-        public Func<OptimulaGenerator, IPeriod, IBundleProps, IBundleProps, Int32> AgrHourLimitFunc { get; private set; }
+        public Func<OptimulaGenerator, IPeriod, IBundleProps, IBundleProps, Int32> AgrWorkMaximFunc { get; private set; }
         public Func<OptimulaGenerator, IPeriod, IBundleProps, IBundleProps, Int32> AgrWorkLimitFunc { get; private set; }
-        public Func<OptimulaGenerator, IPeriod, IBundleProps, IBundleProps, Int32> AgtWorkTarifFunc { get; private set; }
-        public Func<OptimulaGenerator, IPeriod, IBundleProps, IBundleProps, Int32> AgtWorkRatioFunc { get; private set; }
-        public Func<OptimulaGenerator, IPeriod, IBundleProps, IBundleProps, Int32> AgtHourLimitFunc { get; private set; }
-        public Func<OptimulaGenerator, IPeriod, IBundleProps, IBundleProps, Int32> AgtWorkLimitFunc { get; private set; }
+        public Func<OptimulaGenerator, IPeriod, IBundleProps, IBundleProps, Int32> AgrWorkHoursFunc { get; private set; }
+        public Func<OptimulaGenerator, IPeriod, IBundleProps, IBundleProps, Int32> AgrTaskTarifFunc { get; private set; }
+        public Func<OptimulaGenerator, IPeriod, IBundleProps, IBundleProps, Int32> AgrTaskRatioFunc { get; private set; }
+        public Func<OptimulaGenerator, IPeriod, IBundleProps, IBundleProps, Int32> AgrTaskMaximFunc { get; private set; }
+        public Func<OptimulaGenerator, IPeriod, IBundleProps, IBundleProps, Int32> AgrTaskLimitFunc { get; private set; }
+        public Func<OptimulaGenerator, IPeriod, IBundleProps, IBundleProps, Int32> AgrTaskHoursFunc { get; private set; }
         public Func<OptimulaGenerator, IPeriod, IBundleProps, IBundleProps, Int32> ClothesHoursFunc { get; private set; }
         public Func<OptimulaGenerator, IPeriod, IBundleProps, IBundleProps, Int32> ClothesDailyFunc { get; private set; }
         public Func<OptimulaGenerator, IPeriod, IBundleProps, IBundleProps, Int32> MealConDailyFunc { get; private set; }
@@ -453,17 +745,38 @@ namespace Procezor.OptimulaTest.Examples
             }
             return decimal.ToInt32(numberValue * 60);
         }
+        public static decimal ParseNADecimal(string valString)
+        {
+            return 0;
+        }
+        public static decimal ParseDecimal(string valString)
+        {
+            if (valString.Trim().Equals(""))
+            {
+                return 0;
+            }
+            string numberToParse = valString.Replace('.', ',').TrimEnd('%').Replace("Kč", "").TrimEnd(' ');
+            decimal numberValue = 0;
+            try
+            {
+                numberValue = decimal.Parse(numberToParse);
+            }
+            catch (Exception e)
+            {
+            }
+            return (numberValue);
+        }
         protected static Func<OptimulaGenerator, IPeriod, IBundleProps, IBundleProps, Int32> WithValue(Int32 val)
         {
             return (OptimulaGenerator gen, IPeriod period, IBundleProps ruleset, IBundleProps prevset) => (val);
         }
-        public OptimulaGenerator WithNANothingVal(Int32 val)
+        public OptimulaGenerator WithResultDescription(string val)
         {
+            this.ResultDescription = val;
             return this;
         }
-        public OptimulaGenerator WithAgrWorkTarifVal(Int32 val)
+        public OptimulaGenerator WithNANothingVal(Int32 val)
         {
-            DefaultAgrWorkTarifValue = val;
             return this;
         }
         public OptimulaGenerator WithAgrWorkRatioVal(Int32 val)
@@ -471,9 +784,14 @@ namespace Procezor.OptimulaTest.Examples
             DefaultAgrWorkRatioValue = val;
             return this;
         }
-        public OptimulaGenerator WithAgrHourLimitVal(Int32 val)
+        public OptimulaGenerator WithAgrWorkMaximVal(Int32 val)
         {
-            DefaultAgrHourLimitValue = val;
+            DefaultAgrWorkMaximValue = val;
+            return this;
+        }
+        public OptimulaGenerator WithAgrWorkTarifVal(Int32 val)
+        {
+            DefaultAgrWorkTarifValue = val;
             return this;
         }
         public OptimulaGenerator WithAgrWorkLimitVal(Int32 val)
@@ -481,24 +799,34 @@ namespace Procezor.OptimulaTest.Examples
             DefaultAgrWorkLimitValue = val;
             return this;
         }
-        public OptimulaGenerator WithAgtWorkTarifVal(Int32 val)
+        public OptimulaGenerator WithAgrWorkHoursVal(Int32 val)
         {
-            DefaultAgtWorkTarifValue = val;
+            DefaultAgrWorkHoursValue = val;
             return this;
         }
-        public OptimulaGenerator WithAgtWorkRatioVal(Int32 val)
+        public OptimulaGenerator WithAgrTaskRatioVal(Int32 val)
         {
-            DefaultAgtWorkRatioValue = val;
+            DefaultAgrTaskRatioValue = val;
             return this;
         }
-        public OptimulaGenerator WithAgtHourLimitVal(Int32 val)
+        public OptimulaGenerator WithAgrTaskMaximVal(Int32 val)
         {
-            DefaultAgtHourLimitValue = val;
+            DefaultAgrTaskMaximValue = val;
             return this;
         }
-        public OptimulaGenerator WithAgtWorkLimitVal(Int32 val)
+        public OptimulaGenerator WithAgrTaskTarifVal(Int32 val)
         {
-            DefaultAgtWorkLimitValue = val;
+            DefaultAgrTaskTarifValue = val;
+            return this;
+        }
+        public OptimulaGenerator WithAgrTaskLimitVal(Int32 val)
+        {
+            DefaultAgrTaskLimitValue = val;
+            return this;
+        }
+        public OptimulaGenerator WithAgrTaskHoursVal(Int32 val)
+        {
+            DefaultAgrTaskHoursValue = val;
             return this;
         }
         public OptimulaGenerator WithClothesHoursVal(Int32 val)
@@ -686,9 +1014,9 @@ namespace Procezor.OptimulaTest.Examples
             AgrWorkRatioFunc = func;
             return this;
         }
-        public OptimulaGenerator WithAgrHourLimit(Func<OptimulaGenerator, IPeriod, IBundleProps, IBundleProps, Int32> func)
+        public OptimulaGenerator WithAgrWorkMaxim(Func<OptimulaGenerator, IPeriod, IBundleProps, IBundleProps, Int32> func)
         {
-            AgrHourLimitFunc = func;
+            AgrWorkMaximFunc = func;
             return this;
         }
         public OptimulaGenerator WithAgrWorkLimit(Func<OptimulaGenerator, IPeriod, IBundleProps, IBundleProps, Int32> func)
@@ -698,22 +1026,22 @@ namespace Procezor.OptimulaTest.Examples
         }
         public OptimulaGenerator WithAgtWorkTarif(Func<OptimulaGenerator, IPeriod, IBundleProps, IBundleProps, Int32> func)
         {
-            AgtWorkTarifFunc = func;
+            AgrTaskTarifFunc = func;
             return this;
         }
         public OptimulaGenerator WithAgtWorkRatio(Func<OptimulaGenerator, IPeriod, IBundleProps, IBundleProps, Int32> func)
         {
-            AgtWorkRatioFunc = func;
+            AgrTaskRatioFunc = func;
             return this;
         }
-        public OptimulaGenerator WithAgtHourLimit(Func<OptimulaGenerator, IPeriod, IBundleProps, IBundleProps, Int32> func)
+        public OptimulaGenerator WithAgrTaskMaxim(Func<OptimulaGenerator, IPeriod, IBundleProps, IBundleProps, Int32> func)
         {
-            AgtHourLimitFunc = func;
+            AgrTaskMaximFunc = func;
             return this;
         }
-        public OptimulaGenerator WithAgtWorkLimit(Func<OptimulaGenerator, IPeriod, IBundleProps, IBundleProps, Int32> func)
+        public OptimulaGenerator WithAgrTaskLimit(Func<OptimulaGenerator, IPeriod, IBundleProps, IBundleProps, Int32> func)
         {
-            AgtWorkLimitFunc = func;
+            AgrTaskLimitFunc = func;
             return this;
         }
         public OptimulaGenerator WithClothesHours(Func<OptimulaGenerator, IPeriod, IBundleProps, IBundleProps, Int32> func)
@@ -881,6 +1209,162 @@ namespace Procezor.OptimulaTest.Examples
             QSumWorkHourFunc = func;
             return this;
         }
+
+        public OptimulaGenerator WithNADecimalVal(decimal val)
+        {
+            return this;
+        }
+        public OptimulaGenerator WithTestResultPeriodNum(decimal val)
+        {
+            TestResultPeriod = new Period(decimal.ToInt32(val));
+            return this;
+        }
+        public OptimulaGenerator WithTestImpWorkSheetHrs(decimal val)
+        {
+            TestImpWorkSheetHrs = val;
+            return this;
+        }
+        public OptimulaGenerator WithTestImpWorkSheetDay(decimal val)
+        {
+            TestImpWorkSheetDay = val;
+            return this;
+        }
+        public OptimulaGenerator WithTestImpWotkAbsenHrs(decimal val)
+        {
+            TestImpWotkAbsenHrs = val;
+            return this;
+        }
+        public OptimulaGenerator WithTestImpWotkAbsenDay(decimal val)
+        {
+            TestImpWotkAbsenDay = val;
+            return this;
+        }
+        public OptimulaGenerator WithTestImpOverSheetHrs(decimal val)
+        {
+            TestImpOverSheetHrs = val;
+            return this;
+        }
+        public OptimulaGenerator WithTestResAgrWorkPaymt(decimal val)
+        {
+            TestResAgrWorkPaymt = val;
+            return this;
+        }
+        public OptimulaGenerator WithTestResAgrWorkHours(decimal val)
+        {
+            TestResAgrWorkHours = val;
+            return this;
+        }
+        public OptimulaGenerator WithTestResAgrTaskPaymt(decimal val)
+        {
+            TestResAgrTaskPaymt = val;
+            return this;
+        }
+        public OptimulaGenerator WithTestResAgrTaskHours(decimal val)
+        {
+            TestResAgrTaskHours = val;
+            return this;
+        }
+        public OptimulaGenerator WithTestResClothesPaymt(decimal val)
+        {
+            TestResClothesPaymt = val;
+            return this;
+        }
+        public OptimulaGenerator WithTestResMealConPaymt(decimal val)
+        {
+            TestResMealConPaymt = val;
+            return this;
+        }
+        public OptimulaGenerator WithTestResHomeOffPaymt(decimal val)
+        {
+            TestResHomeOffPaymt = val;
+            return this;
+        }
+        public OptimulaGenerator WithTestImpMSalaryAward(decimal val)
+        {
+            TestImpMSalaryAward = val;
+            return this;
+        }
+        public OptimulaGenerator WithTestResMSalaryAward(decimal val)
+        {
+            TestResMSalaryAward = val;
+            return this;
+        }
+        public OptimulaGenerator WithTestImpHSalaryAward(decimal val)
+        {
+            TestImpHSalaryAward = val;
+            return this;
+        }
+        public OptimulaGenerator WithTestResHSalaryAward(decimal val)
+        {
+            TestResHSalaryAward = val;
+            return this;
+        }
+        public OptimulaGenerator WithTestImpFPremiumBase(decimal val)
+        {
+            TestImpFPremiumBase = val;
+            return this;
+        }
+        public OptimulaGenerator WithTestResFPremiumBase(decimal val)
+        {
+            TestResFPremiumBase = val;
+            return this;
+        }
+        public OptimulaGenerator WithTestImpFPremiumBoss(decimal val)
+        {
+            TestImpFPremiumBoss = val;
+            return this;
+        }
+        public OptimulaGenerator WithTestResFPremiumBoss(decimal val)
+        {
+            TestResFPremiumBoss = val;
+            return this;
+        }
+        public OptimulaGenerator WithTestImpFPremiumPers(decimal val)
+        {
+            TestImpFPremiumPers = val;
+            return this;
+        }
+        public OptimulaGenerator WithTestResFPremiumPers(decimal val)
+        {
+            TestResFPremiumPers = val;
+            return this;
+        }
+        public OptimulaGenerator WithTestImpQAverageBase(decimal val)
+        {
+            TestImpQAverageBase = val;
+            return this;
+        }
+        public OptimulaGenerator WithTestImpAverPremsPay(decimal val)
+        {
+            TestImpAverPremsPay = val;
+            return this;
+        }
+        public OptimulaGenerator WithTestImpAverVacasPay(decimal val)
+        {
+            TestImpAverVacasPay = val;
+            return this;
+        }
+        public OptimulaGenerator WithTestImpAverOversPay(decimal val)
+        {
+            TestImpAverOversPay = val;
+            return this;
+        }
+        public OptimulaGenerator WithTestResIncomesNetto(decimal val)
+        {
+            TestResIncomesNetto = val;
+            return this;
+        }
+        public OptimulaGenerator WithTestResPaymentNetto(decimal val)
+        {
+            TestResPaymentNetto = val;
+            return this;
+        }
+        public OptimulaGenerator WithTestResDiffValNetto(decimal val)
+        {
+            TestResDiffValNetto = val;
+            return this;
+        }
+                                                                                                                        
         public static double ResultDivDouble(double dblUpper, double dblDown, double multiplex = 1.0)
         {
             if (dblDown == 0.0)
@@ -992,6 +1476,12 @@ namespace Procezor.OptimulaTest.Examples
         {
             double dblValue = ResultDivDouble(value, 100);
             return DayFormatDouble(dblValue);
+        }
+        public static string DecFormatDecimal(decimal decValue)
+        {
+            //string resultText = string.Format("{0:N2}", decValue);
+            string resultText = decValue.ToString("0.00");
+            return resultText;
         }
     }
 }

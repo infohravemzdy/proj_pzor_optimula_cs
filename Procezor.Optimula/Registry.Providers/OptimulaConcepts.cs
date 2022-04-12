@@ -377,7 +377,7 @@ namespace HraveMzdy.Procezor.Optimula.Registry.Providers
             decimal paymentBasisVal = OperationsDec.Divide(evalTarget.PaymentBasisVal, 100);
             decimal paymentHoursVal = OperationsDec.Divide(evalTarget.PaymentHoursVal, 60);
 
-            decimal paymentValueRes = salaryRules.PaymentWithTariffAndHours(paymentBasisVal, paymentHoursVal);
+            decimal paymentValueRes = salaryRules.PaymentWithTariffAndUnits(paymentBasisVal, paymentHoursVal);
 
             ITermResult resultsValues = new PaymentHoursResult(target, spec,
                 paymentBasisVal, paymentHoursVal, 
@@ -600,7 +600,7 @@ namespace HraveMzdy.Procezor.Optimula.Registry.Providers
             decimal paymentBasisVal = OperationsDec.Divide(evalTarget.OptimusBasisVal, 100);
             decimal paymentHoursVal = OperationsDec.Divide(evalTarget.OptimusHoursVal, 60);
 
-            decimal paymentValueRes = salaryRules.PaymentWithTariffAndHours(paymentBasisVal, paymentHoursVal);
+            decimal paymentValueRes = salaryRules.PaymentWithTariffAndUnits(paymentBasisVal, paymentHoursVal);
 
             ITermResult resultsValues = new OptimusHoursResult(target, spec,
                 paymentBasisVal, paymentHoursVal,
@@ -974,7 +974,7 @@ namespace HraveMzdy.Procezor.Optimula.Registry.Providers
             decimal settlemDiffsVal = (optimusTargetsVal + settlemResultsBasis - settlemAllowceVal - settlemAgrWorkVal);
 
             decimal reducedHoursVal = evalOptimusTargets.OptimusHoursVal;
-            decimal reducedTarifVal = salaryRules.TariffWithPaymentAndHours(Math.Max(0, settlemDiffsVal), reducedHoursVal);
+            decimal reducedTarifVal = salaryRules.TariffWithPaymentAndUnits(Math.Max(0, settlemDiffsVal), reducedHoursVal);
             decimal reducedResValue = Math.Max(0, settlemDiffsVal);
             decimal reducedResBasis = Math.Max(0, optimusTargetsVal - reducedResValue);
 
@@ -1221,6 +1221,7 @@ namespace HraveMzdy.Procezor.Optimula.Registry.Providers
             decimal reducedResBasis = Math.Max(0, optimusTargetsVal - reducedBasisVal);
 
             ITermResult resultsValues = new ReducedNettoResult(target, spec,
+                optimusTargetsVal,
                 reducedBasisVal,
                 RoundToInt(reducedResValue), RoundToInt(reducedResBasis));
 
@@ -1442,7 +1443,7 @@ namespace HraveMzdy.Procezor.Optimula.Registry.Providers
                     paymentHoursRes = salaryRules.HoursToHalfHoursNorm(redHourLimitVal);
                 }
             }
-            decimal paymentValueRes = salaryRules.PaymentWithTariffAndHours(paymentBasisRes, paymentHoursRes);
+            decimal paymentValueRes = salaryRules.PaymentWithTariffAndUnits(paymentBasisRes, paymentHoursRes);
 
             var resSettlemTargets = GetContractResult<SettlemTargetsResult>(target, period, results,
                target.Contract, ArticleCode.Get((Int32)OptimulaArticleConst.ARTICLE_SETTLEM_TARGETS));
@@ -1468,7 +1469,7 @@ namespace HraveMzdy.Procezor.Optimula.Registry.Providers
 
                 paymentHoursRes = Math.Max(0, (paymentHoursRes - agrCandidsHours));
 
-                paymentValueRes = salaryRules.PaymentWithTariffAndHours(paymentBasisRes, paymentHoursRes);
+                paymentValueRes = salaryRules.PaymentWithTariffAndUnits(paymentBasisRes, paymentHoursRes);
             }
 
             ITermResult resultsValues = new AgrworkHoursResult(target, spec,
@@ -1893,7 +1894,7 @@ namespace HraveMzdy.Procezor.Optimula.Registry.Providers
 
             decimal hoursAllowceRes = salaryRules.RelativeAmountWithMonthlyAndCoeffAndWorkCoeff(allowceHfullVal, monthlyCoeffs, workingCoeffs);
 
-            decimal allowceValueRes = salaryRules.PaymentWithTariffAndHours(allowceTarifVal, hoursAllowceRes);
+            decimal allowceValueRes = salaryRules.PaymentWithTariffAndUnits(allowceTarifVal, hoursAllowceRes);
 
             ITermResult resultsValues = new AllowceHfullResult(target, spec, 
                 allowceTarifVal, allowceHfullVal, 
@@ -1971,7 +1972,7 @@ namespace HraveMzdy.Procezor.Optimula.Registry.Providers
 
             decimal hoursWorked = evalTimeActa.WorkSheetHrsVal;
 
-            decimal allowceValueRes = salaryRules.PaymentWithTariffAndHours(allowceTarifVal, hoursWorked);
+            decimal allowceValueRes = salaryRules.PaymentWithTariffAndUnits(allowceTarifVal, hoursWorked);
 
             ITermResult resultsValues = new AllowceHoursResult(target, spec, 
                 allowceTarifVal, 
@@ -2049,7 +2050,7 @@ namespace HraveMzdy.Procezor.Optimula.Registry.Providers
 
             decimal dailyWorked = evalTimeActa.WorkSheetDayVal;
 
-            decimal allowceValueRes = salaryRules.PaymentWithTariffAndHours(allowceDailyVal, dailyWorked);
+            decimal allowceValueRes = salaryRules.PaymentWithTariffAndUnits(allowceDailyVal, dailyWorked);
 
             ITermResult resultsValues = new AllowceDailyResult(target, spec, 
                 allowceDailyVal, 
@@ -2120,7 +2121,7 @@ namespace HraveMzdy.Procezor.Optimula.Registry.Providers
 
             decimal dailyWorked = evalTimeActa.WorkSheetDayVal;
 
-            decimal allowceValueRes = salaryRules.PaymentWithTariffAndHours(allowceDailyVal, dailyWorked);
+            decimal allowceValueRes = salaryRules.PaymentRoundDownWithTariffAndUnits(allowceDailyVal, dailyWorked);
 
             ITermResult resultsValues = new AlldownDailyResult(target, spec,
                 allowceDailyVal,
@@ -2221,7 +2222,7 @@ namespace HraveMzdy.Procezor.Optimula.Registry.Providers
                     paymentHoursRes = salaryRules.HoursToHalfHoursNorm(redHourLimitVal);
                 }
             }
-            decimal paymentValueRes = salaryRules.PaymentWithTariffAndHours(paymentBasisRes, paymentHoursRes);
+            decimal paymentValueRes = salaryRules.PaymentWithTariffAndUnits(paymentBasisRes, paymentHoursRes);
 
             ITermResult resultsValues = new OffworkHoursResult(target, spec,
                 redWorkTarifVal, redWorkRatioVal, redWorkLimitVal, redHourLimitVal,
@@ -2316,7 +2317,7 @@ namespace HraveMzdy.Procezor.Optimula.Registry.Providers
                     paymentHoursRes = salaryRules.HoursToHalfHoursNorm(redHourLimitVal);
                 }
             }
-            decimal paymentValueRes = salaryRules.PaymentWithTariffAndHours(paymentBasisRes, paymentHoursRes);
+            decimal paymentValueRes = salaryRules.PaymentWithTariffAndUnits(paymentBasisRes, paymentHoursRes);
 
             ITermResult resultsValues = new OfftaskHoursResult(target, spec,
                 redWorkTarifVal, redWorkRatioVal, redWorkLimitVal, redHourLimitVal,
@@ -2402,7 +2403,7 @@ namespace HraveMzdy.Procezor.Optimula.Registry.Providers
 
             decimal hoursAllowceRes = salaryRules.RelativeAmountWithMonthlyAndCoeffAndWorkCoeff(allowceHfullVal, monthlyCoeffs, workingCoeffs);
 
-            decimal allowceValueRes = salaryRules.PaymentWithTariffAndHours(allowceTarifVal, hoursAllowceRes);
+            decimal allowceValueRes = salaryRules.PaymentWithTariffAndUnits(allowceTarifVal, hoursAllowceRes);
 
             ITermResult resultsValues = new OffsetsHfullResult(target, spec,
                 allowceTarifVal, allowceHfullVal,
@@ -2480,7 +2481,7 @@ namespace HraveMzdy.Procezor.Optimula.Registry.Providers
 
             decimal hoursWorked = evalTimeActa.WorkSheetHrsVal;
 
-            decimal allowceValueRes = salaryRules.PaymentWithTariffAndHours(allowceTarifVal, hoursWorked);
+            decimal allowceValueRes = salaryRules.PaymentWithTariffAndUnits(allowceTarifVal, hoursWorked);
 
             ITermResult resultsValues = new OffsetsHoursResult(target, spec,
                 allowceTarifVal,
@@ -2558,7 +2559,7 @@ namespace HraveMzdy.Procezor.Optimula.Registry.Providers
 
             decimal dailyWorked = evalTimeActa.WorkSheetDayVal;
 
-            decimal allowceValueRes = salaryRules.PaymentWithTariffAndHours(allowceDailyVal, dailyWorked);
+            decimal allowceValueRes = salaryRules.PaymentWithTariffAndUnits(allowceDailyVal, dailyWorked);
 
             ITermResult resultsValues = new OffsetsDailyResult(target, spec,
                 allowceDailyVal,
@@ -2629,7 +2630,7 @@ namespace HraveMzdy.Procezor.Optimula.Registry.Providers
 
             decimal dailyWorked = evalTimeActa.WorkSheetDayVal;
 
-            decimal allowceValueRes = salaryRules.PaymentWithTariffAndHours(allowceDailyVal, dailyWorked);
+            decimal allowceValueRes = salaryRules.PaymentRoundDownWithTariffAndUnits(allowceDailyVal, dailyWorked);
 
             ITermResult resultsValues = new OffdownDailyResult(target, spec,
                 allowceDailyVal,

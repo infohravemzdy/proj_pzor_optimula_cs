@@ -1,16 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+using HraveMzdy.Legalios.Service.Types;
+using HraveMzdy.Legalios.Service.Interfaces;
+using HraveMzdy.Procezor.Generator;
 using AutoFixture;
 using FluentAssertions;
 using NSubstitute;
 using Xunit;
 using Xunit.Abstractions;
-using HraveMzdy.Legalios.Service.Types;
-using HraveMzdy.Legalios.Service.Interfaces;
-using Procezor.OptimulaTest.Examples;
 
 namespace Procezor.OptimulaTest.Service
 {
+    [Collection("Non-Parallel")]
     public class ServiceTestPuzzleExamples2022 : ServiceTestPuzzleExampleTemplate
     {
         private static IPeriod TestPeriod = new Period(2022, 1);

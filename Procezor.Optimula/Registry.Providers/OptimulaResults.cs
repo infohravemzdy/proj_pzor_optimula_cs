@@ -251,16 +251,19 @@ namespace HraveMzdy.Procezor.Optimula.Registry.Providers
     public class ReducedNettoResult : OptimulaTermResult
     {
         public ReducedNettoResult(ITermTarget target, IArticleSpec spec,
+            decimal optimusBasisVal,
             decimal paymentBasisVal,
             Int32 value, Int32 basis) : base(target, spec, value, basis)
         {
+            OptimusBasisVal = optimusBasisVal;
             ReducedBasisVal = paymentBasisVal;
         }
+        public decimal OptimusBasisVal { get; private set; }
         public decimal ReducedBasisVal { get; private set; }
 
         public override string ResultMessage()
         {
-            return $"Value: {this.ResultValue}; Basis: {this.ResultBasis}; Reduced Basis: {this.ReducedBasisVal}";
+            return $"Value: {this.ResultValue}; Basis: {this.ResultBasis}; Reduced Basis: {this.ReducedBasisVal}; Optimus Basis: {this.OptimusBasisVal}";
         }
     }
 

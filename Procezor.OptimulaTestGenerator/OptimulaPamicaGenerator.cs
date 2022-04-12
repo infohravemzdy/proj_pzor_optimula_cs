@@ -1,16 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using HraveMzdy.Legalios.Service.Interfaces;
-using HraveMzdy.Legalios.Service.Types;
 using HraveMzdy.Procezor.Optimula.Registry.Constants;
 using HraveMzdy.Procezor.Optimula.Registry.Providers;
 using HraveMzdy.Procezor.Service.Interfaces;
 using HraveMzdy.Procezor.Service.Types;
 
-namespace Procezor.OptimulaTest.Examples
+namespace HraveMzdy.Procezor.Generator
 {
     public class OptimulaPamicaGenerator : OptimulaGenerator
     {
@@ -40,13 +37,12 @@ namespace Procezor.OptimulaTest.Examples
                 ParseIntNumber,   //   1  EmployeeNumb	101
                 ParseNANothing,   //   2  EmployeeName	Drahota Jakub
                 ParseNANothing,   //   3  PeriodName  	202201
-                ParseDecNumber,   //   3  AgrWorkTarif	105,00
-                ParseDecNumber,   //   4  AgrWorkRatio	0,14
-                ParseHrsNumber,   //   5  AgrHourLimit	0,00
-                ParseDecNumber,   //   6  AgrWorkLimit	0,00
-                ParseDecNumber,   //   7  ClothesHours	11,17
-                ParseDecNumber,   //   8  ClothesDaily	57,00
-                ParseDecNumber,   //   9  MealConDaily	57,00
+                ParseDecNumber,   //   4  AgrWorkTarif	105,00
+                ParseDecNumber,   //   5  AgrWorkRatio	0,14
+                ParseHrsNumber,   //   6  AgrHourLimit	0,00
+                ParseDecNumber,   //   7  AgrWorkLimit	0,00
+                ParseDecNumber,   //   8  ClothesHours	11,17
+                ParseDecNumber,   //   9  ClothesDaily	57,00
                 ParseDecNumber,   //  10  HomeOffTarif	0,00
                 ParseHrsNumber,   //  11  HomeOffHours	0,00
                 ParseDecNumber,   //  12  MSalaryAward	8 000,00
@@ -63,21 +59,21 @@ namespace Procezor.OptimulaTest.Examples
                 ParseHrsNumber,   //  23  VacaRecomHrs	80,00
                 ParseHrsNumber,   //  24  PaidRecomHrs	0,00
                 ParseHrsNumber,   //  25  HoliRecomHrs	0,00
-                ParseNANothing,   //26  -----------
-                ParseHrsNumber,   //   27  OverAllowHrs	40,00
-                ParseDecNumber,   //   28  OverAllowRio	0,25
-                ParseHrsNumber,   //   29  RestAllowHrs	0,00
-                ParseDecNumber,   //   30  RestAllowRio	0,00
-                ParseHrsNumber,   //   31  WendAllowHrs	0,00
-                ParseDecNumber,   //   32  WendAllowRio	0,00
-                ParseHrsNumber,   //   33  NighAllowHrs	18,25
-                ParseDecNumber,   //   34  NighAllowRio	0,10
-                ParseHrsNumber,   //   35  HoliAllowHrs	0,00
-                ParseDecNumber,   //   36  HoliAllowRio	0,00
-                ParseDecNumber,   //   37  QClothesBase	3 506,00
-                ParseDecNumber,   //   38  QHOfficeBase	0,00
-                ParseDecNumber,   //   39  QAgrWorkBase	8 852,00
-                ParseDecNumber,   //   40  QSumWorkHour	912,08
+                ParseNANothing,   //  26  -----------
+                ParseHrsNumber,   //  27  OverAllowHrs	40,00
+                ParseDecNumber,   //  28  OverAllowRio	0,25
+                ParseHrsNumber,   //  29  RestAllowHrs	0,00
+                ParseDecNumber,   //  30  RestAllowRio	0,00
+                ParseHrsNumber,   //  31  WendAllowHrs	0,00
+                ParseDecNumber,   //  32  WendAllowRio	0,00
+                ParseHrsNumber,   //  33  NighAllowHrs	18,25
+                ParseDecNumber,   //  34  NighAllowRio	0,10
+                ParseHrsNumber,   //  35  HoliAllowHrs	0,00
+                ParseDecNumber,   //  36  HoliAllowRio	0,00
+                ParseDecNumber,   //  37  QClothesBase	3 506,00
+                ParseDecNumber,   //  38  QHOfficeBase	0,00
+                ParseDecNumber,   //  39  QAgrWorkBase	8 852,00
+                ParseDecNumber,   //  40  QSumWorkHour	912,08
             };
             Int32[] specIntValues = specDefValues.Zip(specParser).Select((x) => x.Second(x.First)).ToArray();
 
@@ -94,23 +90,23 @@ namespace Procezor.OptimulaTest.Examples
                 gen.WithAgrWorkLimitVal,   //   7  AgrWorkLimit	0,00
                 gen.WithClothesHoursVal,   //   8  ClothesHours	11,17
                 gen.WithClothesDailyVal,   //   9  ClothesDaily	106,00
-                gen.WithMealConDailyVal,   //  10  MealConDaily	106,00
-                gen.WithHomeOffTarifVal,   //  11  HomeOffTarif	0,00
-                gen.WithHomeOffHoursVal,   //  12  HomeOffHours	0,00
-                gen.WithMSalaryAwardVal,   //  13  MSalaryAward	8 000,00
-                gen.WithHSalaryAwardVal,   //  14  HSalaryAward	0,00
-                gen.WithFPremiumBaseVal,   //  15  FPremiumBase	0,00
-                gen.WithFPremiumBossVal,   //  16  FPremiumBoss	0,00
-                gen.WithFPremiumPersVal,   //  17  FPremiumPers	0,00
-                gen.WithFullSheetHrsVal,   //  18  FullSheetHrs	176,00
-                gen.WithTimeSheetHrsVal,   //  19  TimeSheetHrs	176,00
-                gen.WithHoliSheetHrsVal,   //  20  HoliSheetHrs	0,00
-                gen.WithWorkSheetHrsVal,   //  21  WorkSheetHrs	96,00
-                gen.WithWorkSheetDayVal,   //  22  WorkSheetDay	12,00
-                gen.WithOverSheetHrsVal,   //  23  OverSheetHrs	40,00
-                gen.WithVacaRecomHrsVal,   //  24  VacaRecomHrs	80,00
-                gen.WithPaidRecomHrsVal,   //  25  PaidRecomHrs	0,00
-                gen.WithHoliRecomHrsVal,   //  26  HoliRecomHrs	0,00
+                gen.WithHomeOffTarifVal,   //  10  HomeOffTarif	0,00
+                gen.WithHomeOffHoursVal,   //  11  HomeOffHours	0,00
+                gen.WithMSalaryAwardVal,   //  12  MSalaryAward	8 000,00
+                gen.WithHSalaryAwardVal,   //  13  HSalaryAward	0,00
+                gen.WithFPremiumBaseVal,   //  14  FPremiumBase	0,00
+                gen.WithFPremiumBossVal,   //  15  FPremiumBoss	0,00
+                gen.WithFPremiumPersVal,   //  16  FPremiumPers	0,00
+                gen.WithFullSheetHrsVal,   //  17  FullSheetHrs	176,00
+                gen.WithTimeSheetHrsVal,   //  18  TimeSheetHrs	176,00
+                gen.WithHoliSheetHrsVal,   //  19  HoliSheetHrs	0,00
+                gen.WithWorkSheetHrsVal,   //  20  WorkSheetHrs	96,00
+                gen.WithWorkSheetDayVal,   //  21  WorkSheetDay	12,00
+                gen.WithOverSheetHrsVal,   //  22  OverSheetHrs	40,00
+                gen.WithVacaRecomHrsVal,   //  23  VacaRecomHrs	80,00
+                gen.WithPaidRecomHrsVal,   //  24  PaidRecomHrs	0,00
+                gen.WithHoliRecomHrsVal,   //  25  HoliRecomHrs	0,00
+                gen.WithNANothingVal,      //  26  -----------------
                 gen.WithOverAllowHrsVal,   //  27  OverAllowHrs	40,00
                 gen.WithOverAllowRioVal,   //  28  OverAllowRio	0,25
                 gen.WithRestAllowHrsVal,   //  29  RestAllowHrs	0,00
@@ -125,7 +121,7 @@ namespace Procezor.OptimulaTest.Examples
                 gen.WithQHOfficeBaseVal,   //  38  QHOfficeBase	0,00
                 gen.WithQAgrWorkBaseVal,   //  39  QAgrWorkBase	8 852,00
                 gen.WithQSumWorkHourVal,   //  40  QSumWorkHour	912,08
-            };
+            };                                 
 #else
             Func<Int32, OptimulaGenerator>[] specGenerator = new Func<Int32, OptimulaGenerator>[]
             {
@@ -134,27 +130,27 @@ namespace Procezor.OptimulaTest.Examples
                 gen.WithNANothingVal,      //   3  PeriodName  	202201
                 gen.WithAgrWorkTarifVal,   //   4  AgrWorkTarif	105,00
                 gen.WithAgrWorkRatioVal,   //   5  AgrWorkRatio	0,14
-                gen.WithAgrHourLimitVal,   //   6  AgrHourLimit	0,00
+                gen.WithAgrWorkMaximVal,   //   6  AgrHourLimit	0,00
                 gen.WithAgrWorkLimitVal,   //   7  AgrWorkLimit	0,00
                 gen.WithClothesHoursVal,   //   8  ClothesHours	11,17
                 gen.WithClothesDailyVal,   //   9  ClothesDaily	106,00
-                gen.WithMealConDailyVal,   //  10  MealConDaily	106,00
-                gen.WithHomeOffTarifVal,   //  11  HomeOffTarif	0,00
-                gen.WithHomeOffHoursVal,   //  12  HomeOffHours	0,00
-                gen.WithMSalaryAwardVal,   //  13  MSalaryAward	8 000,00
-                gen.WithHSalaryAwardVal,   //  14  HSalaryAward	0,00
-                gen.WithFPremiumBaseVal,   //  15  FPremiumBase	0,00
-                gen.WithFPremiumBossVal,   //  16  FPremiumBoss	0,00
-                gen.WithFPremiumPersVal,   //  17  FPremiumPers	0,00
-                gen.WithFullSheetHrsVal,   //  18  FullSheetHrs	176,00
-                gen.WithTimeSheetHrsVal,   //  19  TimeSheetHrs	176,00
-                gen.WithHoliSheetHrsVal,   //  20  HoliSheetHrs	0,00
-                gen.WithWorkSheetHrsVal,   //  21  WorkSheetHrs	96,00
-                gen.WithWorkSheetDayVal,   //  22  WorkSheetDay	12,00
-                gen.WithOverSheetHrsVal,   //  23  OverSheetHrs	40,00
-                gen.WithVacaRecomHrsVal,   //  24  VacaRecomHrs	80,00
-                gen.WithPaidRecomHrsVal,   //  25  PaidRecomHrs	0,00
-                gen.WithHoliRecomHrsVal,   //  26  HoliRecomHrs	0,00
+                gen.WithHomeOffTarifVal,   //  10  HomeOffTarif	0,00
+                gen.WithHomeOffHoursVal,   //  11  HomeOffHours	0,00
+                gen.WithMSalaryAwardVal,   //  12  MSalaryAward	8 000,00
+                gen.WithHSalaryAwardVal,   //  13  HSalaryAward	0,00
+                gen.WithFPremiumBaseVal,   //  14  FPremiumBase	0,00
+                gen.WithFPremiumBossVal,   //  15  FPremiumBoss	0,00
+                gen.WithFPremiumPersVal,   //  16  FPremiumPers	0,00
+                gen.WithFullSheetHrsVal,   //  17  FullSheetHrs	176,00
+                gen.WithTimeSheetHrsVal,   //  18  TimeSheetHrs	176,00
+                gen.WithHoliSheetHrsVal,   //  19  HoliSheetHrs	0,00
+                gen.WithWorkSheetHrsVal,   //  20  WorkSheetHrs	96,00
+                gen.WithWorkSheetDayVal,   //  21  WorkSheetDay	12,00
+                gen.WithOverSheetHrsVal,   //  22  OverSheetHrs	40,00
+                gen.WithVacaRecomHrsVal,   //  23  VacaRecomHrs	80,00
+                gen.WithPaidRecomHrsVal,   //  24  PaidRecomHrs	0,00
+                gen.WithHoliRecomHrsVal,   //  25  HoliRecomHrs	0,00
+                gen.WithNANothingVal,      //  26  --------------------
                 gen.WithNANothingVal,      //  27  OverAllowHrs	40,00
                 gen.WithNANothingVal,      //  28  OverAllowRio	0,25
                 gen.WithNANothingVal,      //  29  RestAllowHrs	0,00
@@ -169,206 +165,11 @@ namespace Procezor.OptimulaTest.Examples
                 gen.WithNANothingVal,      //  38  QHOfficeBase	0,00
                 gen.WithNANothingVal,      //  39  QAgrWorkBase	8 852,00
                 gen.WithNANothingVal,      //  40  QSumWorkHour	912,08
-            };
+            };                                
 #endif
             specIntValues.Zip(specGenerator).Select((x) => x.Second(x.First)).ToArray();
 
             return gen;
-        }
-        public override string[] BuildImportXlsString(IPeriod period, IBundleProps ruleset, IBundleProps prevset)
-        {
-            Int32 AgrWorkTarifVal = AgrWorkTarifFunc(this, period, ruleset, prevset);
-            Int32 AgrWorkRatioVal = AgrWorkRatioFunc(this, period, ruleset, prevset);
-            Int32 AgrHourLimitVal = AgrHourLimitFunc(this, period, ruleset, prevset);
-            Int32 AgrWorkLimitVal = AgrWorkLimitFunc(this, period, ruleset, prevset);
-            Int32 AgtWorkTarifVal = AgtWorkTarifFunc(this, period, ruleset, prevset);
-            Int32 AgtWorkRatioVal = AgtWorkRatioFunc(this, period, ruleset, prevset);
-            Int32 AgtHourLimitVal = AgtHourLimitFunc(this, period, ruleset, prevset);
-            Int32 AgtWorkLimitVal = AgtWorkLimitFunc(this, period, ruleset, prevset);
-            Int32 ClothesHoursVal = ClothesHoursFunc(this, period, ruleset, prevset);
-            Int32 ClothesDailyVal = ClothesDailyFunc(this, period, ruleset, prevset);
-            Int32 MealConDailyVal = MealConDailyFunc(this, period, ruleset, prevset);
-            Int32 HomeOffMonthVal = HomeOffMonthFunc(this, period, ruleset, prevset);
-            Int32 HomeOffTarifVal = HomeOffTarifFunc(this, period, ruleset, prevset);
-            Int32 HomeOffHoursVal = HomeOffHoursFunc(this, period, ruleset, prevset);
-
-            Int32 MSalaryAwardVal = MSalaryAwardFunc(this, period, ruleset, prevset);
-            Int32 HSalaryAwardVal = HSalaryAwardFunc(this, period, ruleset, prevset);
-            Int32 FPremiumBaseVal = FPremiumBaseFunc(this, period, ruleset, prevset);
-            Int32 FPremiumBossVal = FPremiumBossFunc(this, period, ruleset, prevset);
-            Int32 FPremiumPersVal = FPremiumPersFunc(this, period, ruleset, prevset);
-            Int32 FullSheetHrsVal = FullSheetHrsFunc(this, period, ruleset, prevset);
-            Int32 TimeSheetHrsVal = TimeSheetHrsFunc(this, period, ruleset, prevset);
-            Int32 HoliSheetHrsVal = HoliSheetHrsFunc(this, period, ruleset, prevset);
-            Int32 WorkSheetHrsVal = WorkSheetHrsFunc(this, period, ruleset, prevset);
-            Int32 WorkSheetDayVal = WorkSheetDayFunc(this, period, ruleset, prevset);
-            Int32 OverSheetHrsVal = OverSheetHrsFunc(this, period, ruleset, prevset);
-            Int32 VacaRecomHrsVal = VacaRecomHrsFunc(this, period, ruleset, prevset);
-            Int32 PaidRecomHrsVal = PaidRecomHrsFunc(this, period, ruleset, prevset);
-            Int32 HoliRecomHrsVal = HoliRecomHrsFunc(this, period, ruleset, prevset);
-            Int32 OverAllowHrsVal = OverAllowHrsFunc(this, period, ruleset, prevset);
-            Int32 OverAllowRioVal = OverAllowRioFunc(this, period, ruleset, prevset);
-            Int32 RestAllowHrsVal = RestAllowHrsFunc(this, period, ruleset, prevset);
-            Int32 RestAllowRioVal = RestAllowRioFunc(this, period, ruleset, prevset);
-            Int32 WendAllowHrsVal = WendAllowHrsFunc(this, period, ruleset, prevset);
-            Int32 WendAllowRioVal = WendAllowRioFunc(this, period, ruleset, prevset);
-            Int32 NighAllowHrsVal = NighAllowHrsFunc(this, period, ruleset, prevset);
-            Int32 NighAllowRioVal = NighAllowRioFunc(this, period, ruleset, prevset);
-            Int32 HoliAllowHrsVal = HoliAllowHrsFunc(this, period, ruleset, prevset);
-            Int32 HoliAllowRioVal = HoliAllowRioFunc(this, period, ruleset, prevset);
-            Int32 QClothesBaseVal = QClothesBaseFunc(this, period, ruleset, prevset);
-            Int32 QHOfficeBaseVal = QHOfficeBaseFunc(this, period, ruleset, prevset);
-            Int32 QAgrWorkBaseVal = QAgrWorkBaseFunc(this, period, ruleset, prevset);
-            Int32 QSumWorkHourVal = QSumWorkHourFunc(this, period, ruleset, prevset);
-
-            string[] valuesList = new string[]
-            {
-                Number, // A
-                Name,   // B
-                period.Code.ToString(),                 // C
-                $"{CcyFormatIntX100(AgrWorkTarifVal)}", // D
-                $"{NumFormatIntX100(AgrWorkRatioVal)}", // E
-                $"{HrsFormatIntX060(AgrHourLimitVal)}", // F
-                $"{NumFormatIntX100(AgrWorkLimitVal)}", // G
-                $"{CcyFormatIntX100(ClothesHoursVal)}", // H
-                $"{CcyFormatIntX100(ClothesDailyVal)}", // I
-                $"{CcyFormatIntX100(MealConDailyVal)}", // J
-                $"{CcyFormatIntX100(HomeOffTarifVal)}", // K
-                $"{HrsFormatIntX060(HomeOffHoursVal)}", // L
-                $"{CcyFormatIntX100(MSalaryAwardVal)}", // M
-                $"{CcyFormatIntX100(HSalaryAwardVal)}", // N
-                $"{CcyFormatIntX100(FPremiumBaseVal)}", // O  
-                $"{CcyFormatIntX100(FPremiumBossVal)}", // P  
-                $"{CcyFormatIntX100(FPremiumPersVal)}", // Q  
-                $"{HrsFormatIntX060(FullSheetHrsVal)}", // R  
-                $"{HrsFormatIntX060(TimeSheetHrsVal)}", // S  
-                $"{HrsFormatIntX060(HoliSheetHrsVal)}", // T 
-                $"{HrsFormatIntX060(WorkSheetHrsVal)}", // U
-                $"{DayFormatIntX100(WorkSheetDayVal)}", // V
-                $"{HrsFormatIntX060(OverSheetHrsVal)}", // W  
-                $"{HrsFormatIntX060(VacaRecomHrsVal)}", // X  
-                $"{HrsFormatIntX060(PaidRecomHrsVal)}", // Y   
-                $"{HrsFormatIntX060(HoliRecomHrsVal)}", // Z     
-                $"{HrsFormatIntX060(OverAllowHrsVal)}", // AA
-                $"{CcyFormatIntX100(OverAllowRioVal)}", // AB
-                $"{HrsFormatIntX060(RestAllowHrsVal)}", // AC
-                $"{CcyFormatIntX100(RestAllowRioVal)}", // AD
-                $"{HrsFormatIntX060(WendAllowHrsVal)}", // AE
-                $"{CcyFormatIntX100(WendAllowRioVal)}", // AF
-                $"{HrsFormatIntX060(NighAllowHrsVal)}", // AG
-                $"{CcyFormatIntX100(NighAllowRioVal)}", // AH
-                $"{HrsFormatIntX060(HoliAllowHrsVal)}", // AI
-                $"{CcyFormatIntX100(HoliAllowRioVal)}", // AJ
-                $"{CcyFormatIntX100(QClothesBaseVal)}", // AK
-                $"{CcyFormatIntX100(QHOfficeBaseVal)}", // AL
-                $"{CcyFormatIntX100(QAgrWorkBaseVal)}", // AM
-                $"{CcyFormatIntX100(QSumWorkHourVal)}", // AN
-            };
-            if (WorkSheetHrsVal != 0)
-            {
-                string[] importResult = new string[] { string.Join('\t', valuesList) };
-
-                return importResult;
-            }
-            return Array.Empty<string>();
-        }
-        public override string[] BuildImportCsvString(IPeriod period, IBundleProps ruleset, IBundleProps prevset)
-        {
-            Int32 AgrWorkTarifVal = AgrWorkTarifFunc(this, period, ruleset, prevset);
-            Int32 AgrWorkRatioVal = AgrWorkRatioFunc(this, period, ruleset, prevset);
-            Int32 AgrHourLimitVal = AgrHourLimitFunc(this, period, ruleset, prevset);
-            Int32 AgrWorkLimitVal = AgrWorkLimitFunc(this, period, ruleset, prevset);
-            Int32 AgtWorkTarifVal = AgtWorkTarifFunc(this, period, ruleset, prevset);
-            Int32 AgtWorkRatioVal = AgtWorkRatioFunc(this, period, ruleset, prevset);
-            Int32 AgtHourLimitVal = AgtHourLimitFunc(this, period, ruleset, prevset);
-            Int32 AgtWorkLimitVal = AgtWorkLimitFunc(this, period, ruleset, prevset);
-            Int32 ClothesHoursVal = ClothesHoursFunc(this, period, ruleset, prevset);
-            Int32 ClothesDailyVal = ClothesDailyFunc(this, period, ruleset, prevset);
-            Int32 MealConDailyVal = MealConDailyFunc(this, period, ruleset, prevset);
-            Int32 HomeOffMonthVal = HomeOffMonthFunc(this, period, ruleset, prevset);
-            Int32 HomeOffTarifVal = HomeOffTarifFunc(this, period, ruleset, prevset);
-            Int32 HomeOffHoursVal = HomeOffHoursFunc(this, period, ruleset, prevset);
-
-            Int32 MSalaryAwardVal = MSalaryAwardFunc(this, period, ruleset, prevset);
-            Int32 HSalaryAwardVal = HSalaryAwardFunc(this, period, ruleset, prevset);
-            Int32 FPremiumBaseVal = FPremiumBaseFunc(this, period, ruleset, prevset);
-            Int32 FPremiumBossVal = FPremiumBossFunc(this, period, ruleset, prevset);
-            Int32 FPremiumPersVal = FPremiumPersFunc(this, period, ruleset, prevset);
-            Int32 FullSheetHrsVal = FullSheetHrsFunc(this, period, ruleset, prevset);
-            Int32 TimeSheetHrsVal = TimeSheetHrsFunc(this, period, ruleset, prevset);
-            Int32 HoliSheetHrsVal = HoliSheetHrsFunc(this, period, ruleset, prevset);
-            Int32 WorkSheetHrsVal = WorkSheetHrsFunc(this, period, ruleset, prevset);
-            Int32 WorkSheetDayVal = WorkSheetDayFunc(this, period, ruleset, prevset);
-            Int32 OverSheetHrsVal = OverSheetHrsFunc(this, period, ruleset, prevset);
-            Int32 VacaRecomHrsVal = VacaRecomHrsFunc(this, period, ruleset, prevset);
-            Int32 PaidRecomHrsVal = PaidRecomHrsFunc(this, period, ruleset, prevset);
-            Int32 HoliRecomHrsVal = HoliRecomHrsFunc(this, period, ruleset, prevset);
-            Int32 OverAllowHrsVal = OverAllowHrsFunc(this, period, ruleset, prevset);
-            Int32 OverAllowRioVal = OverAllowRioFunc(this, period, ruleset, prevset);
-            Int32 RestAllowHrsVal = RestAllowHrsFunc(this, period, ruleset, prevset);
-            Int32 RestAllowRioVal = RestAllowRioFunc(this, period, ruleset, prevset);
-            Int32 WendAllowHrsVal = WendAllowHrsFunc(this, period, ruleset, prevset);
-            Int32 WendAllowRioVal = WendAllowRioFunc(this, period, ruleset, prevset);
-            Int32 NighAllowHrsVal = NighAllowHrsFunc(this, period, ruleset, prevset);
-            Int32 NighAllowRioVal = NighAllowRioFunc(this, period, ruleset, prevset);
-            Int32 HoliAllowHrsVal = HoliAllowHrsFunc(this, period, ruleset, prevset);
-            Int32 HoliAllowRioVal = HoliAllowRioFunc(this, period, ruleset, prevset);
-            Int32 QClothesBaseVal = QClothesBaseFunc(this, period, ruleset, prevset);
-            Int32 QHOfficeBaseVal = QHOfficeBaseFunc(this, period, ruleset, prevset);
-            Int32 QAgrWorkBaseVal = QAgrWorkBaseFunc(this, period, ruleset, prevset);
-            Int32 QSumWorkHourVal = QSumWorkHourFunc(this, period, ruleset, prevset);
-
-            string[] valuesList = new string[]
-            {
-                Number, // A
-                Name,   // B
-                period.Code.ToString(),                 // C
-                $"{CcyFormatIntX100(AgrWorkTarifVal)}", // D
-                $"{NumFormatIntX100(AgrWorkRatioVal)}", // E
-                $"{HrsFormatIntX060(AgrHourLimitVal)}", // F
-                $"{NumFormatIntX100(AgrWorkLimitVal)}", // G
-                $"{CcyFormatIntX100(ClothesHoursVal)}", // H
-                $"{CcyFormatIntX100(ClothesDailyVal)}", // I
-                $"{CcyFormatIntX100(MealConDailyVal)}", // J
-                $"{CcyFormatIntX100(HomeOffTarifVal)}", // K
-                $"{HrsFormatIntX060(HomeOffHoursVal)}", // L
-                $"{CcyFormatIntX100(MSalaryAwardVal)}", // M
-                $"{CcyFormatIntX100(HSalaryAwardVal)}", // N
-                $"{CcyFormatIntX100(FPremiumBaseVal)}", // O 
-                $"{CcyFormatIntX100(FPremiumBossVal)}", // P 
-                $"{CcyFormatIntX100(FPremiumPersVal)}", // Q 
-                $"{HrsFormatIntX060(FullSheetHrsVal)}", // R 
-                $"{HrsFormatIntX060(TimeSheetHrsVal)}", // S 
-                $"{HrsFormatIntX060(HoliSheetHrsVal)}", // T 
-                $"{HrsFormatIntX060(WorkSheetHrsVal)}", // U
-                $"{DayFormatIntX100(WorkSheetDayVal)}", // V
-                $"{HrsFormatIntX060(OverSheetHrsVal)}", // W 
-                $"{HrsFormatIntX060(VacaRecomHrsVal)}", // X    
-                $"{HrsFormatIntX060(PaidRecomHrsVal)}", // Y     
-                $"{HrsFormatIntX060(HoliRecomHrsVal)}", // Z     
-                $"{HrsFormatIntX060(OverAllowHrsVal)}", // AA
-                $"{CcyFormatIntX100(OverAllowRioVal)}", // AB
-                $"{HrsFormatIntX060(RestAllowHrsVal)}", // AC
-                $"{CcyFormatIntX100(RestAllowRioVal)}", // AD
-                $"{HrsFormatIntX060(WendAllowHrsVal)}", // AE
-                $"{CcyFormatIntX100(WendAllowRioVal)}", // AF
-                $"{HrsFormatIntX060(NighAllowHrsVal)}", // AG
-                $"{CcyFormatIntX100(NighAllowRioVal)}", // AH
-                $"{HrsFormatIntX060(HoliAllowHrsVal)}", // AI
-                $"{CcyFormatIntX100(HoliAllowRioVal)}", // AJ
-                $"{CcyFormatIntX100(QClothesBaseVal)}", // AK
-                $"{CcyFormatIntX100(QHOfficeBaseVal)}", // AL
-                $"{CcyFormatIntX100(QAgrWorkBaseVal)}", // AM
-                $"{CcyFormatIntX100(QSumWorkHourVal)}", // AN
-            };         
-            
-            if (WorkSheetHrsVal != 0)
-            {
-                string[] importResult = new string[] { string.Join(';', valuesList) + ";" };
-
-                return importResult;
-            }
-            return Array.Empty<string>();
         }
         public override IEnumerable<ITermTarget> BuildSpecTargets(IPeriod period, IBundleProps ruleset, IBundleProps prevset)
         {
@@ -381,14 +182,14 @@ namespace Procezor.OptimulaTest.Examples
             var positionEmp = PositionCode.Get(POSITION_NULL);
             var variant1Emp = VariantCode.Get(1);
 
-            Int32 AgrWorkTarifVal = AgrWorkTarifFunc(this, period, ruleset, prevset);
             Int32 AgrWorkRatioVal = AgrWorkRatioFunc(this, period, ruleset, prevset);
-            Int32 AgrHourLimitVal = AgrHourLimitFunc(this, period, ruleset, prevset);
+            Int32 AgrWorkMaximVal = AgrWorkMaximFunc(this, period, ruleset, prevset);
+            Int32 AgrWorkTarifVal = AgrWorkTarifFunc(this, period, ruleset, prevset);
             Int32 AgrWorkLimitVal = AgrWorkLimitFunc(this, period, ruleset, prevset);
-            Int32 AgtWorkTarifVal = AgtWorkTarifFunc(this, period, ruleset, prevset);
-            Int32 AgtWorkRatioVal = AgtWorkRatioFunc(this, period, ruleset, prevset);
-            Int32 AgtHourLimitVal = AgtHourLimitFunc(this, period, ruleset, prevset);
-            Int32 AgtWorkLimitVal = AgtWorkLimitFunc(this, period, ruleset, prevset);
+            Int32 AgrTaskRatioVal = AgrTaskRatioFunc(this, period, ruleset, prevset);
+            Int32 AgrTaskMaximVal = AgrTaskMaximFunc(this, period, ruleset, prevset);
+            Int32 AgrTaskTarifVal = AgrTaskTarifFunc(this, period, ruleset, prevset);
+            Int32 AgrTaskLimitVal = AgrTaskLimitFunc(this, period, ruleset, prevset);
             Int32 ClothesHoursVal = ClothesHoursFunc(this, period, ruleset, prevset);
             Int32 ClothesDailyVal = ClothesDailyFunc(this, period, ruleset, prevset);
             Int32 MealConDailyVal = MealConDailyFunc(this, period, ruleset, prevset);
@@ -489,7 +290,7 @@ namespace Procezor.OptimulaTest.Examples
             var allowceAgrwork = new AgrworkHoursTarget(montCode, contractEmp, positionEmp, variant1Emp,
                 ArticleCode.Get((Int32)OptimulaArticleConst.ARTICLE_AGRWORK_TARGETS),
                 ConceptCode.Get((Int32)OptimulaConceptConst.CONCEPT_AGRWORK_HOURS), 
-                AgrWorkTarifVal, AgrWorkRatioVal, AgrWorkLimitVal, AgrHourLimitVal);
+                AgrWorkTarifVal, AgrWorkRatioVal, AgrWorkLimitVal, AgrWorkMaximVal);
             // AllowceHfull		ALLOWCE_HFULL
             var allowceHOffice = new AllowceHfullTarget(montCode, contractEmp, positionEmp, variant1Emp,
                 ArticleCode.Get((Int32)OptimulaArticleConst.ARTICLE_ALLOWCE_HOFFICE),

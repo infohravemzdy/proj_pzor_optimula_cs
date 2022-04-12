@@ -27,6 +27,11 @@ namespace HraveMzdy.Procezor.Optimula.Service
 
         public ServiceOptimulaPamicaEps() : base(TEST_VERSION_EPS, TEST_FINAL_DEFS)
         {
+            var buildSuccess = BuildFactories();
+            if (buildSuccess == false)
+            {
+                Console.WriteLine($"Version: {this.Version}, build factories failed");
+            }
         }
 
         public override IEnumerable<IContractTerm> GetContractTerms(IPeriod period, IEnumerable<ITermTarget> targets)
