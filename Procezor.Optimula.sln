@@ -7,9 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Procezor.Optimula", "Procez
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Procezor.OptimulaTest", "Procezor.OptimulaTest\Procezor.OptimulaTest.csproj", "{EA4F885F-D7A2-43BE-9245-775251EADFD1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Procezor.OptimulaGenerator", "Procezor.OptimulaTestGenerator\Procezor.OptimulaGenerator.csproj", "{067E35BA-B6C0-4BD7-910C-E1EAABE2DC9C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Procezor.OptimulaTestData", "Procezor.OptimulaTestData\Procezor.OptimulaTestData.csproj", "{6A5EEA0A-6F75-4D35-85F2-DC6B1DF7A3FA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Procezor.OptimulaTestData", "Procezor.OptimulaTestData\Procezor.OptimulaTestData.csproj", "{6A5EEA0A-6F75-4D35-85F2-DC6B1DF7A3FA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Procezor.OptimulaGenerator", "Procezor.OptimulaGenerator\Procezor.OptimulaGenerator.csproj", "{FA65B06B-D06D-419D-8E24-359427FD42E7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -25,14 +25,14 @@ Global
 		{EA4F885F-D7A2-43BE-9245-775251EADFD1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EA4F885F-D7A2-43BE-9245-775251EADFD1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EA4F885F-D7A2-43BE-9245-775251EADFD1}.Release|Any CPU.Build.0 = Release|Any CPU
-		{067E35BA-B6C0-4BD7-910C-E1EAABE2DC9C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{067E35BA-B6C0-4BD7-910C-E1EAABE2DC9C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{067E35BA-B6C0-4BD7-910C-E1EAABE2DC9C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{067E35BA-B6C0-4BD7-910C-E1EAABE2DC9C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{6A5EEA0A-6F75-4D35-85F2-DC6B1DF7A3FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{6A5EEA0A-6F75-4D35-85F2-DC6B1DF7A3FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6A5EEA0A-6F75-4D35-85F2-DC6B1DF7A3FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6A5EEA0A-6F75-4D35-85F2-DC6B1DF7A3FA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FA65B06B-D06D-419D-8E24-359427FD42E7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FA65B06B-D06D-419D-8E24-359427FD42E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FA65B06B-D06D-419D-8E24-359427FD42E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FA65B06B-D06D-419D-8E24-359427FD42E7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Procezor.OptimulaTestGenerator\Procezor.OptimulaGenerator.csproj" />
+    <ProjectReference Include="..\Procezor.OptimulaGenerator\Procezor.OptimulaGenerator.csproj" />
   </ItemGroup>
 
 </Project>
